@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dem.Models
+namespace Dem.Models.Entities
 {
     public class Supplier : Entity
     {
@@ -17,7 +17,7 @@ namespace Dem.Models
 
         private Supplier() { }
 
-        public Supplier (Guid id, string name, string type, string tIN)
+        public Supplier(Guid id, string name, string type, string tIN)
         {
             Id = id;
             Name = name;

@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dem.Models
+namespace Dem.Models.Entities
 {
     public class MaterialHistory : Entity
     {

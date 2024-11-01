@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dem.Models
+namespace Dem.Models.Entities
 {
     public class ProductHistory : Entity
     {
@@ -19,7 +19,7 @@ namespace Dem.Models
         public Guid PartnerId { get; set; }
         public Partner Partner { get; set; }
 
-        private ProductHistory () { }
+        private ProductHistory() { }
         public ProductHistory(Guid id, DateOnly date, int quantityOfProduct, decimal price, Guid productId, Guid partnerId)
         {
             Id = id;

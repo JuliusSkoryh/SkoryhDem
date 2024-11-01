@@ -6,29 +6,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dem.Models
+namespace Dem.Models.Entities
 {
     public class Product : Entity
     {
         public string Type { get; set; }
         public string Name { get; set; }
         public string Article { get; set; }
-        public string Description { get; set; }
-        public byte[] Image { get; set; }
-        public decimal MinPriceForPartners { get; set; }
-        public double PackageLength { get; set; }
-        public double PackageWidth { get; set; }
-        public double PackageHeight { get; set; }
-        public double GrossWeight { get; set; }
+        public string? Description { get; set; }
+        public byte[]? Image { get; set; }
+        public decimal? MinPriceForPartners { get; set; }
+        public double? PackageLength { get; set; }
+        public double? PackageWidth { get; set; }
+        public double? PackageHeight { get; set; }
+        public double? GrossWeight { get; set; }
         public int StandartNumber { get; set; }
-        public string ProductionType { get; set; }
+        public string? ProductionType { get; set; }
         public decimal Cost { get; set; }
-        public int WorkShopNumber { get; set; }
+        public int? WorkShopNumber { get; set; }
         public int QuantityInStorage { get; set; }
 
 
 
-        public DateTime TimeToMakeProduct { get; set; }
+        public DateTime? TimeToMakeProduct { get; set; }
 
 
         public ICollection<Material> Materials { get; set; }
@@ -37,6 +37,8 @@ namespace Dem.Models
 
 
         private Product() { }
+
+
 
         public Product(Guid id, string type, string name, string article, string description, byte[] image, decimal minPriceForPartners, double packageLength,
             double packageWidth, double packageHeight, double grossWeight, int standartNumber, string productionType, decimal cost,
@@ -60,6 +62,15 @@ namespace Dem.Models
             Materials = materials;
             TimeToMakeProduct = timeToMakeProduct;
             QuantityInStorage = quantityInStorage;
+        }
+
+        public Product(string type, string name, string article, int standartNumber, decimal cost)
+        {
+            Type = type;
+            Name = name;
+            Article = article;
+            StandartNumber = standartNumber;
+            Cost = cost;
         }
     }
 }

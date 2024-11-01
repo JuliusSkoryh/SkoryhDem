@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dem.Primitives
 {
-    public class Entity : IEquatable<Entity>
+    public abstract class Entity : IEquatable<Entity>
     {
         protected Entity() { }
         public Guid Id { get; init; }

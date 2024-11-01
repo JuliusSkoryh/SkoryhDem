@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dem.Models
+namespace Dem.Models.Entities
 {
-    public class Partner :Entity
+    public class Partner : Entity
     {
         public string Type { get; set; }
         public string Name { get; set; }
@@ -22,9 +22,9 @@ namespace Dem.Models
         public ICollection<ProductHistory> ProductHistories { get; set; }
         public ICollection<Request> Requests { get; set; }
 
-        private Partner () { }
+        private Partner() { }
 
-        public Partner (Guid id, string type, string name, string director, string email, string phone, string legalAddress, string tIN, int rating, byte[] logo)
+        public Partner(Guid id, string type, string name, string director, string email, string phone, string legalAddress, string tIN, int rating, byte[] logo)
         {
             Id = id;
             Type = type;

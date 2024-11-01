@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Dem.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dem.Models.Enums
+namespace Dem.ViewModels
 {
-    public enum OperationType
+    public class MakeRequestViewModel : ViewModelBase
     {
-        Addition,
-        Subtraction
     }
 }

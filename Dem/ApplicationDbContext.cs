@@ -1,4 +1,4 @@
-﻿using Dem.Models;
+﻿using Dem.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Dem
         public DbSet<PassportInfo> PassportInfos { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductHistory> ProductHistories { get; set; }
-        public DbSet<Dem.Models.Request> Requests { get; set; }
+        public DbSet<Request> Requests { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
 
 
