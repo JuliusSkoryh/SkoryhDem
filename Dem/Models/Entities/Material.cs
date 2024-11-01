@@ -25,9 +25,6 @@ namespace Dem.Models.Entities
         public Guid SupplierId { get; set; }
         public Supplier Supplier { get; set; }
 
-
-        public ICollection<MaterialHistory> MaterialHistories { get; set; }
-        public ICollection<DeliveryHistory> DeliveryHistories { get; set; }
         public ICollection<Product> Products { get; set; }
 
 

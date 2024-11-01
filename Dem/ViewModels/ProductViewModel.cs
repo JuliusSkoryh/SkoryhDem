@@ -1,5 +1,4 @@
 ﻿using Dem.Models.Entities;
-using Dem.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dem.ViewModels
 {
-    public class AddProductViewModel : ViewModelBase
+    public class ProductViewModel
     {
         private readonly Product _product;
 
@@ -27,10 +26,9 @@ namespace Dem.ViewModels
         public ICollection<Material>? Materials => _product.Materials;
         public ICollection<Request> Requests => _product.Requests;
 
-        public AddProductViewModel(Product product)
+        public ProductViewModel(Product product)
         {
             _product = product;
         }
-
     }
 }

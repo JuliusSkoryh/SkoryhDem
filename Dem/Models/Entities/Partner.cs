@@ -19,7 +19,6 @@ namespace Dem.Models.Entities
         public byte[]? Logo { get; set; }
         public int Rating { get; set; }
 
-        public ICollection<ProductHistory> ProductHistories { get; set; }
         public ICollection<Request> Requests { get; set; }
 
         private Partner() { }

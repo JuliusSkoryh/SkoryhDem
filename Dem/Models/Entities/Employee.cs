@@ -16,14 +16,9 @@ namespace Dem.Models.Entities
         public HealhStatus HealhStatus { get; set; }
         public string JobTitle { get; set; }
 
-        public Guid PassportInfoId { get; set; }
-        public PassportInfo PassportInfo { get; set; }
-
-        public ICollection<BankDetail> BankDetails { get; set; }
-
         private Employee() { }
 
-        public Employee(Guid id, string fullName, DateOnly dateOfBirth, bool haveFamily, HealhStatus healhStatus, string jobTitle, Guid passportInfoId)
+        public Employee(Guid id, string fullName, DateOnly dateOfBirth, bool haveFamily, HealhStatus healhStatus, string jobTitle)
         {
             Id = id;
             FullName = fullName;
@@ -31,7 +26,6 @@ namespace Dem.Models.Entities
             HaveFamily = haveFamily;
             HealhStatus = healhStatus;
             JobTitle = jobTitle;
-            PassportInfoId = passportInfoId;
         }
     }
 }

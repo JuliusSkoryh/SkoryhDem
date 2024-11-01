@@ -16,10 +16,6 @@ namespace Dem.Models.Entities
         public string? Description { get; set; }
         public byte[]? Image { get; set; }
         public decimal? MinPriceForPartners { get; set; }
-        public double? PackageLength { get; set; }
-        public double? PackageWidth { get; set; }
-        public double? PackageHeight { get; set; }
-        public double? GrossWeight { get; set; }
         public int StandartNumber { get; set; }
         public string? ProductionType { get; set; }
         public decimal Cost { get; set; }
@@ -28,11 +24,7 @@ namespace Dem.Models.Entities
 
 
 
-        public DateTime? TimeToMakeProduct { get; set; }
-
-
         public ICollection<Material> Materials { get; set; }
-        public ICollection<ProductHistory> ProductHistories { get; set; }
         public ICollection<Request> Requests { get; set; }
 
 
@@ -40,9 +32,8 @@ namespace Dem.Models.Entities
 
 
 
-        public Product(Guid id, string type, string name, string article, string description, byte[] image, decimal minPriceForPartners, double packageLength,
-            double packageWidth, double packageHeight, double grossWeight, int standartNumber, string productionType, decimal cost,
-            int workShopNumber, ICollection<Material> materials, DateTime timeToMakeProduct, int quantityInStorage)
+        public Product(Guid id, string type, string name, string article, string description, byte[] image, decimal minPriceForPartners, int standartNumber, string productionType, decimal cost,
+            int workShopNumber, ICollection<Material> materials, int quantityInStorage)
         {
             Id = id;
             Type = type;
@@ -51,16 +42,11 @@ namespace Dem.Models.Entities
             Description = description;
             Image = image;
             MinPriceForPartners = minPriceForPartners;
-            PackageLength = packageLength;
-            PackageWidth = packageWidth;
-            PackageHeight = packageHeight;
-            GrossWeight = grossWeight;
             StandartNumber = standartNumber;
             ProductionType = productionType;
             Cost = cost;
             WorkShopNumber = workShopNumber;
             Materials = materials;
-            TimeToMakeProduct = timeToMakeProduct;
             QuantityInStorage = quantityInStorage;
         }
 

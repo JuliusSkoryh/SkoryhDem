@@ -13,8 +13,6 @@ namespace Dem.Models.Entities
         public string Type { get; set; }
         public string TIN { get; set; }
 
-        public ICollection<DeliveryHistory> DeliveryHistories { get; set; }
-
         private Supplier() { }
 
         public Supplier(Guid id, string name, string type, string tIN)
