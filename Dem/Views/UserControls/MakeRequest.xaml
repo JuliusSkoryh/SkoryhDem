@@ -3,10 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dem.Views.UserControls"
+             xmlns:local="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MakeRequestViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Height" Value="30"/>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock
+    Grid.Row="0"
+    Text="Создание заказа"
+    FontSize="26"
+    Margin="5"/>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left">
+            <TextBlock Margin="5" Text="Выберите продукт"/>
+            <ComboBox 
+                Margin="5"
+                Width="200"
+                ItemsSource="{Binding Products}"
+                DisplayMemberPath="Name"
+                SelectedItem="{Binding SelectedProduct}" />
+        </StackPanel>
         
+        <StackPanel Grid.Row="2" HorizontalAlignment="Left">
+            <TextBlock
+        Margin="5"
+        Text="количество продукта"/>
+            <TextBox
+        Margin="5"
+        Width="130"
+        Text="{Binding QuantityOfProduct}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Left">
+            <TextBlock Margin="5" Text="Выберите партнера"/>
+            <ComboBox 
+                Margin="5"
+                Width="200"
+                ItemsSource="{Binding Partners}"
+                DisplayMemberPath="Name"
+                SelectedItem="{Binding SelectedPartner}" />
+        </StackPanel>
+        
+        <StackPanel Grid.Row="7" Margin="10 0" Orientation="Horizontal">
+            <Button Style="{StaticResource FormButton}" Width="170" Content="Создать заказ" Command="{Binding SaveRequestCommand}"/>
+            <Button Style="{StaticResource FormButton}" Width="100" Content="Закрыть" Command="{Binding CancelWindowCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

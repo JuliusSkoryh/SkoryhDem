@@ -13,11 +13,12 @@ namespace Dem.Models.Entities
         public string Type { get; set; }
         public string TIN { get; set; }
 
+        public IEnumerable<Material> Materials { get; set; }
+
         private Supplier() { }
 
-        public Supplier(Guid id, string name, string type, string tIN)
+        public Supplier(Guid id, string name, string type, string tIN) : base(id)
         {
-            Id = id;
             Name = name;
             Type = type;
             TIN = tIN;

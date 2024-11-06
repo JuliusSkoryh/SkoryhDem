@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dem.Primitives
+﻿namespace Dem.Primitives
 {
     public abstract class Entity : IEquatable<Entity>
     {
         protected Entity() { }
         public Guid Id { get; init; }
+
+        public Entity(Guid id)
+        {
+            Id = id;
+        }
 
         public override bool Equals(object? obj)
         {

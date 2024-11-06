@@ -1,36 +1,69 @@
-﻿using Dem.Models.Entities;
+﻿using Dem.Commands;
+using Dem.Models.Entities;
 using Dem.Primitives;
+using Dem.Services;
+using Dem.Services.DbServices;
+using Dem.Services.DbServices.DbServiceInterfaces;
+using Dem.Views.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Dem.ViewModels
 {
     public class AddProductViewModel : ViewModelBase
     {
-        private readonly Product _product;
+        private readonly IProductService _productService;
+        private readonly IMaterialService _materialService;
 
-        public string Type => _product.Type;
-        public string Name => _product.Name;
-        public string Article => _product.Article;
-        public string? Description => _product.Description;
-        public byte[]? Image => null;
-        public decimal? MinPriceForPartners => _product.MinPriceForPartners;
-        public int StandartNumber => _product.StandartNumber;
-        public string? ProductionType => _product.ProductionType;
-        public decimal Cost => _product.Cost;
-        public int? WorkShopNumber => _product.WorkShopNumber;
-        public int QuantityInStorage => _product.QuantityInStorage;
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public string Article { get; set; }
+        public byte[]? Image { get; set; }
+        public int StandartNumber { get; set; }
+        public decimal Cost { get; set; }
+        public ObservableCollection<Material> Materials { get; private set; }
+        public ObservableCollection<Material> MaterialsSelected { get; set; }
 
-        public ICollection<Material>? Materials => _product.Materials;
-        public ICollection<Request> Requests => _product.Requests;
 
-        public AddProductViewModel(Product product)
+        public ICommand SaveProductCommand { get; }
+        public ICommand CancelWindowCommand { get; }
+
+        private AddProductViewModel(IProductService productService, IMaterialService materialService, INavigationService<ProductListViewModel> navigationProductListService)
         {
-            _product = product;
+            _productService = productService;
+            _materialService = materialService;
+
+
+            SaveProductCommand = new SaveProductCommand(productService, this);
+            CancelWindowCommand = new NavigateCommand<ProductListViewModel>(navigationProductListService);
         }
 
+        private void InitializeAsync()
+        {
+            Materials = new ObservableCollection<Material>(_materialService.GetAllAsync());
+            MaterialsSelected = new ObservableCollection<Material>();
+
+            
+        }
+
+        public static AddProductViewModel CreateAsync(IProductService productService, IMaterialService materialService, NavigationService<ProductListViewModel> navigationProductListService)
+        {
+            var viewModel = new AddProductViewModel(productService ,materialService, navigationProductListService);
+            viewModel.InitializeAsync();
+            return viewModel;
+        }
+
+        public void AddSelectedMaterial(Material material)
+        {
+            if (!MaterialsSelected.Contains(material))
+            {
+                MaterialsSelected.Add(material);
+            }
+        }
     }
 }

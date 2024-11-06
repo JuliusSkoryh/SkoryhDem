@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:nav="clr-namespace:Dem.Views.UserControls" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dem.Views.UserControls"
+             xmlns:local="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ProductListViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -29,11 +29,11 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Продукты" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5"/>
-                    <Button Grid.Column="1" Content="Добавить продукт" HorizontalAlignment="Right" Margin="10 5"/>
+                    <Button Grid.Column="1" Style="{StaticResource NavButton}" Content="Добавить продукт" HorizontalAlignment="Right" Margin="10 5" Command="{Binding AddProductNavigateCommand}"/>
                 </Grid>
             </Border>
-            
-            <ListView Grid.Row="1">
+
+            <ListView Grid.Row="1" ItemsSource="{Binding ProductViewModels}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -51,11 +51,11 @@
 
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="Тип продукта"/>
-                                    <TextBlock Text="{Binding }"/>
+                                    <TextBlock Text="{Binding Type}"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">
                                     <TextBlock Text="Наименование продукта"/>
-                                    <TextBlock Text="{Binding}"/>
+                                    <TextBlock Text="{Binding Name}"/>
                                 </StackPanel>
                             </Grid>
                             
@@ -67,15 +67,15 @@
 
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="Артикль"/>
-                                    <TextBlock Text="{Binding }"/>
+                                    <TextBlock Text="{Binding Article}"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">
                                     <TextBlock Text="Номер стандарта"/>
-                                    <TextBlock Text="{Binding}"/>
+                                    <TextBlock Text="{Binding StandartNumber}"/>
                                 </StackPanel>
                             </Grid>
 
-                            <Grid>
+                            <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
@@ -83,9 +83,9 @@
 
                                 <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
                                     <TextBlock Text="Цена: "/>
-                                    <TextBlock Text="{Binding}"/>
+                                    <TextBlock Text="{Binding Cost}"/>
                                 </StackPanel>
-                                <Button Grid.Column="1" HorizontalAlignment="Right" Margin="10 0" Content="Редактировать" Command="{Binding}"/>
+                                <Button Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource FormButton}" Content="Редактировать" Command="{Binding EditProductCommand}"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>

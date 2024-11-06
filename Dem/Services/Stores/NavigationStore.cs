@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dem.Models.Stores
+namespace Dem.Services.Stores
 {
     public class NavigationStore
     {

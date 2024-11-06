@@ -15,17 +15,20 @@ namespace Dem.Models.Entities
         public bool HaveFamily { get; set; }
         public HealhStatus HealhStatus { get; set; }
         public string JobTitle { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
         private Employee() { }
 
-        public Employee(Guid id, string fullName, DateOnly dateOfBirth, bool haveFamily, HealhStatus healhStatus, string jobTitle)
+        public Employee(Guid id, string fullName, DateOnly dateOfBirth, bool haveFamily, HealhStatus healhStatus, string jobTitle, string email, string password) : base(id)
         {
-            Id = id;
             FullName = fullName;
             DateOfBirth = dateOfBirth;
             HaveFamily = haveFamily;
             HealhStatus = healhStatus;
             JobTitle = jobTitle;
+            Email = email;
+            Password = password;
         }
     }
 }

@@ -13,18 +13,13 @@ namespace Dem.ViewModels
 {
     public class NavigationBarViewModel : ViewModelBase
     {
-        public ICommand NavigateMakeRequestCommand { get; }
-        public ICommand NavigateAddProductCommand { get; }
         public ICommand NavigateProductListCommand { get; }
         public ICommand NavigateRequestListCommand { get; }
 
-        public NavigationBarViewModel(NavigationService<MakeRequestViewModel> navigateMakeRequestCommand, NavigationService<AddProductViewModel> navigateAddProductCommand,
-            NavigationService<ProductListViewModel> navigateProductListCommand, NavigationService<RequestListViewModel> navigateRequestListCommand)
+        public NavigationBarViewModel(INavigationService<ProductListViewModel> navigateProductListService, INavigationService<RequestListViewModel> navigateRequestListService)
         {
-            NavigateMakeRequestCommand = new NavigateCommand<MakeRequestViewModel>(navigateMakeRequestCommand);
-            NavigateAddProductCommand = new NavigateCommand<AddProductViewModel>(navigateAddProductCommand);
-            NavigateProductListCommand = new NavigateCommand<ProductListViewModel>(navigateProductListCommand);
-            NavigateRequestListCommand = new NavigateCommand<RequestListViewModel>(navigateRequestListCommand);
+            NavigateProductListCommand = new NavigateCommand<ProductListViewModel>(navigateProductListService);
+            NavigateRequestListCommand = new NavigateCommand<RequestListViewModel>(navigateRequestListService);
         }
     }
 }

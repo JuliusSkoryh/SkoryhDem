@@ -5,15 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dem" xmlns:usercontrols="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <ContentControl Content="{Binding CurrentViewModel}">
-        <ContentControl.Resources>
+        Title="MainWindow" WindowState="Maximized">
+    <Grid>
+        <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:ProductListViewModel}">
                 <usercontrols:ProductList/>
             </DataTemplate>
-        </ContentControl.Resources>
-    </ContentControl>
-    <!--<Grid>
-        <usercontrols:ProductList/>
-    </Grid>-->
+            <DataTemplate DataType="{x:Type viewmodels:RequestListViewModel}">
+                <usercontrols:RequestList/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddProductViewModel}">
+                <usercontrols:AddProduct/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MakeRequestViewModel}">
+                <usercontrols:MakeRequest/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ProductEditViewModel}">
+                <usercontrols:ProductEdit/>
+            </DataTemplate>
+        </Grid.Resources>
+
+
+        <ContentControl Content="{Binding CurrentViewModel}" />
+    </Grid>
 </Window>

@@ -1,4 +1,4 @@
-﻿using Dem.Models.Stores;
+﻿using Dem.Services.Stores;
 using Dem.Primitives;
 using System;
 using System.Collections.Generic;
@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Dem.Services
 {
-    public class NavigationService<TViewModel> where TViewModel : ViewModelBase
+    public class NavigationService<TViewModel> : INavigationService<TViewModel> where TViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
-        private readonly Func<TViewModel> _createViewModel;
+        private readonly Func<object?, TViewModel> _createViewModel;
 
-        public NavigationService(NavigationStore navigationStore, Func<TViewModel> createViewModel)
+        public NavigationService(NavigationStore navigationStore, Func<object?, TViewModel> createViewModel)
         {
             _navigationStore = navigationStore;
             _createViewModel = createViewModel;
         }
 
-        public void Navigate()
+        public void Navigate(object? parameter = null)
         {
-            _navigationStore.CurrentViewModel = _createViewModel();
+            _navigationStore.CurrentViewModel = _createViewModel(parameter);
         }
     }
 }

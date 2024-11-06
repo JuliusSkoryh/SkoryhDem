@@ -1,4 +1,4 @@
-﻿using Dem.Models.Stores;
+﻿using Dem.Services.Stores;
 using Dem.Primitives;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,6 @@ namespace Dem.ViewModels
             _navigationStore = navigationStore;
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
         }
 
         private void OnCurrentViewModelChanged()

@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:Dem.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -18,11 +23,13 @@
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Button 
                 x:Name="NavRequestList"
+                Style="{StaticResource NavButton}"
                 Content="Заказы"
                 Margin="10 4"
                 Command="{Binding NavigateRequestListCommand}"/>
             <Button 
                 x:Name="NavProductList"
+                Style="{StaticResource NavButton}"
                 Content="Продукция"
                 Margin="10 4"
                 Command="{Binding NavigateProductListCommand}"/>

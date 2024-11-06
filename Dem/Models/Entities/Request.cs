@@ -11,8 +11,8 @@ namespace Dem.Models.Entities
     {
         public int QuantityOfProduct { get; set; }
         public decimal Price { get; set; }
-        public DateOnly DateOfProductCreation { get; set; }
         public DateOnly DateOfCreation { get; set; }
+        public DateOnly? DateOfClosing { get; set; }
         public bool IsPrepayment { get; set; }
 
 
@@ -24,16 +24,15 @@ namespace Dem.Models.Entities
 
         private Request() { }
 
-        public Request(Guid id, int quantityOfProduct, decimal price, DateOnly dateOfProductCreation, DateOnly dateOfCreation, bool isPrepayment, Guid productId, Guid partnerId)
+        public Request(Guid id, int quantityOfProduct, decimal price, DateOnly dateOfCreation, bool isPrepayment, Guid productId, Guid partnerId, DateOnly? dateOfClosing) : base(id)
         {
-            Id = id;
             QuantityOfProduct = quantityOfProduct;
             Price = price;
-            DateOfProductCreation = dateOfProductCreation;
             DateOfCreation = dateOfCreation;
             IsPrepayment = isPrepayment;
             ProductId = productId;
             PartnerId = partnerId;
+            DateOfClosing = dateOfClosing;
         }
     }
 }

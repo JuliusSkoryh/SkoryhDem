@@ -13,16 +13,13 @@ namespace Dem.Models.Entities
         public string Type { get; set; }
         public int QuantityInPackaging { get; set; }
         public string Measurement { get; set; }
-        public string Description { get; set; }
-        public byte[] Image { get; set; }
+        public byte[]? Image { get; set; }
         public decimal Cost { get; set; }
-        //public int QuantityInStock { get; set; }
-        public decimal MinimumQuantityAllowed { get; set; }
         public int QuantityInStorage { get; set; }
-        public int ReservedMaterials { get; set; }
+        public int? ReservedMaterials { get; set; }
 
 
-        public Guid SupplierId { get; set; }
+        public Guid? SupplierId { get; set; }
         public Supplier Supplier { get; set; }
 
         public ICollection<Product> Products { get; set; }
@@ -30,20 +27,16 @@ namespace Dem.Models.Entities
 
         private Material() { }
 
-        public Material(Guid id, string name, string type, int quantityInPackaging, string measurement, string description, byte[] image, decimal cost,
-            decimal minimumQuantityAllowed, Guid supplierId, int quantityInStorage)
+        public Material(Guid id, string name, string type, int quantityInPackaging, string measurement, byte[]? image, decimal cost, Guid? supplierId) : base(id)
         {
-            Id = id;
             Name = name;
             Type = type;
             QuantityInPackaging = quantityInPackaging;
             Measurement = measurement;
-            Description = description;
             Image = image;
             Cost = cost;
-            MinimumQuantityAllowed = minimumQuantityAllowed;
             SupplierId = supplierId;
-            QuantityInStorage = quantityInStorage;
+            QuantityInStorage = 0;
         }
     }
 }

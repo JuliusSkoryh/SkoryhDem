@@ -1,4 +1,5 @@
-﻿using Dem.Primitives;
+﻿using Dem.Models.Enums;
+using Dem.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,14 @@ namespace Dem.Models.Entities
         public string LegalAddress { get; set; }
         public string TIN { get; set; }
         public byte[]? Logo { get; set; }
-        public int Rating { get; set; }
+        public Rating Rating { get; set; }
 
         public ICollection<Request> Requests { get; set; }
 
         private Partner() { }
 
-        public Partner(Guid id, string type, string name, string director, string email, string phone, string legalAddress, string tIN, int rating, byte[] logo)
+        public Partner(Guid id, string type, string name, string director, string email, string phone, string legalAddress, string tIN, Rating rating, byte[] logo) : base(id)
         {
-            Id = id;
             Type = type;
             Name = name;
             Director = director;
