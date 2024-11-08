@@ -40,7 +40,7 @@ namespace Dem.Services.DbServices
         }
         public Product GetWithDetailsAsync(Guid id)
         {
-            Product? product = _db.Products.Include(p => p.Materials).Include(p => p.Requests).FirstOrDefault();
+            Product? product = _db.Products.Include(p => p.Materials).Include(p => p.Requests).FirstOrDefault(p => p.Id == id);
 
             return product == null ? throw new ProductNotFoundException(id) : product;
         }
@@ -58,6 +58,10 @@ namespace Dem.Services.DbServices
             if (product.QuantityInStorage < 0)
             {
                 throw new InvalidProductException("количество продукции на складе не может быть ниже нуля");
+            }
+            if(product.Materials == null || product.Materials.Count == 0)
+            {
+                throw new InvalidProductException("Отсутствует материал продукта");
             }
             if (
                 String.IsNullOrEmpty(product.Type)

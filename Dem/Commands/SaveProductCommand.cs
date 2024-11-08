@@ -1,5 +1,6 @@
 ﻿using Dem.Models.Entities;
 using Dem.Primitives;
+using Dem.Services;
 using Dem.Services.DbServices.DbServiceInterfaces;
 using Dem.ViewModels;
 using System;
@@ -16,11 +17,13 @@ namespace Dem.Commands
         // исправь эту хуйню
         private IProductService _productService;
         private AddProductViewModel _addProductViewModel;
+        private readonly INavigationService<ProductListViewModel> _navigationService;
 
-        public SaveProductCommand(IProductService productService, AddProductViewModel addProductViewModel)
+        public SaveProductCommand(IProductService productService, AddProductViewModel addProductViewModel, INavigationService<ProductListViewModel> navigationService)
         {
             _productService = productService;
             _addProductViewModel = addProductViewModel;
+            _navigationService = navigationService;
         }
 
         public override async Task ExecuteAsync(object parameter)
@@ -32,6 +35,7 @@ namespace Dem.Commands
             {
                 _productService.AddAsync(product);
                 MessageBox.Show("Продукт успешно добавлен в базу данных", "Success");
+                _navigationService.Navigate(null);
             }
             catch (Exception ex)
             {

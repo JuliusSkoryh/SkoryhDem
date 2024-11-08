@@ -48,9 +48,6 @@
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         
-        <Style TargetType="{x:Type ListBoxItem}">
-            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-        </Style>
 
         <Style TargetType="ListBox">
             <Setter Property="Margin" Value="5"/>

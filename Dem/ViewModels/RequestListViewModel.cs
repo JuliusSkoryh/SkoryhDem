@@ -1,16 +1,9 @@
 ﻿using Dem.Primitives;
 using Dem.Services.DbServices.DbServiceInterfaces;
 using Dem.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Dem.Models.Entities;
 using Dem.Commands;
-using Dem.Services.DbServices;
 
 namespace Dem.ViewModels
 {
@@ -35,22 +28,24 @@ namespace Dem.ViewModels
 
 
         public static RequestListViewModel CreateAsync(NavigationBarViewModel navigationBarViewModel, IRequestService requestService,
-            NavigationService<MakeRequestViewModel> navigationService, CloseRequestCommand closeRequestCommand)
+            NavigationService<MakeRequestViewModel> makeRequestnavigationService, NavigationService<RequestListViewModel> requestListnavigationService)
         {
-            var viewModel = new RequestListViewModel(navigationBarViewModel, requestService, navigationService);
-            viewModel.InitializeAsync(closeRequestCommand);
+            var viewModel = new RequestListViewModel(navigationBarViewModel, requestService, makeRequestnavigationService);
+            viewModel.InitializeAsync(requestService, requestListnavigationService);
             return viewModel;
         }
-        private void InitializeAsync(CloseRequestCommand closeRequestCommand)
+        private void InitializeAsync(IRequestService requestService, NavigationService<RequestListViewModel> requestListnavigationService)
         {
-            LoadRequestsAsync(closeRequestCommand);
+            LoadRequestsAsync(requestService, requestListnavigationService);
         }
-        private void LoadRequestsAsync(CloseRequestCommand closeRequestCommand)
+        private void LoadRequestsAsync(IRequestService requestService, NavigationService<RequestListViewModel> requestListnavigationService)
         {
+            _requests = new ObservableCollection<RequestViewModel>();
+
             var requests = _requestService.GetAllWithDetailsAsync();
             foreach (var request in requests)
             {
-                _requests.Add(new RequestViewModel(request, closeRequestCommand));
+                _requests.Add(new RequestViewModel(request, requestService, requestListnavigationService));
             }
         }
     }

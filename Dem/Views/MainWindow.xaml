@@ -23,6 +23,15 @@
             <DataTemplate DataType="{x:Type viewmodels:ProductEditViewModel}">
                 <usercontrols:ProductEdit/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PartnerListViewModel}">
+                <usercontrols:PartnerList/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddPartnerViewModel}">
+                <usercontrols:AddPartner/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditPartnerViewModel}">
+                <usercontrols:EditPartner/>
+            </DataTemplate>
         </Grid.Resources>
 
 

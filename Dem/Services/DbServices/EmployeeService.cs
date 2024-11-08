@@ -48,6 +48,14 @@ namespace Dem.Services.DbServices
                 throw new InvalidEmployeeException();
                           
             }
+            if (employee.Password.Length < 8)
+            {
+                throw new InvalidEmployeeException("пароль должен состоять минимум из 8 символов");
+            }
+            if (DateOnly.FromDateTime(DateTime.Now).Year - employee.DateOfBirth.Year <= 18)
+            {
+                throw new InvalidEmployeeException("неверно задана дата рождения"); 
+            }        
             if (
                 String.IsNullOrEmpty(employee.FullName)
                 || String.IsNullOrEmpty(employee.JobTitle)

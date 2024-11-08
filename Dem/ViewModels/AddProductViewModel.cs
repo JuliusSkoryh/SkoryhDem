@@ -8,6 +8,7 @@ using Dem.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace Dem.ViewModels
         public byte[]? Image { get; set; }
         public int StandartNumber { get; set; }
         public decimal Cost { get; set; }
-        public ObservableCollection<Material> Materials { get; private set; }
+        public ObservableCollection<MaterialViewModel> Materials { get; private set; }
         public ObservableCollection<Material> MaterialsSelected { get; set; }
 
 
@@ -39,16 +40,21 @@ namespace Dem.ViewModels
             _materialService = materialService;
 
 
-            SaveProductCommand = new SaveProductCommand(productService, this);
+            SaveProductCommand = new SaveProductCommand(productService, this, navigationProductListService);
             CancelWindowCommand = new NavigateCommand<ProductListViewModel>(navigationProductListService);
         }
 
         private void InitializeAsync()
         {
-            Materials = new ObservableCollection<Material>(_materialService.GetAllAsync());
+            var materials = _materialService.GetAllAsync();
+            Materials = new ObservableCollection<MaterialViewModel>(
+                materials.Select(m => new MaterialViewModel(m))
+            );
+            foreach (var material in Materials)
+            {
+                material.PropertyChanged += OnMaterialSelectionChanged;
+            }
             MaterialsSelected = new ObservableCollection<Material>();
-
-            
         }
 
         public static AddProductViewModel CreateAsync(IProductService productService, IMaterialService materialService, NavigationService<ProductListViewModel> navigationProductListService)
@@ -58,11 +64,24 @@ namespace Dem.ViewModels
             return viewModel;
         }
 
-        public void AddSelectedMaterial(Material material)
+        private void OnMaterialSelectionChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (!MaterialsSelected.Contains(material))
+            if (e.PropertyName == nameof(MaterialViewModel.IsSelected) && sender is MaterialViewModel material)
             {
-                MaterialsSelected.Add(material);
+                if (material.IsSelected)
+                {
+                    if (!MaterialsSelected.Contains(material.Material))
+                    {
+                        MaterialsSelected.Add(material.Material);
+                    }
+                }
+                else
+                {
+                    if (MaterialsSelected.Contains(material.Material))
+                    {
+                        MaterialsSelected.Remove(material.Material);
+                    }
+                }
             }
         }
     }

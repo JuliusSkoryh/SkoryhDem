@@ -40,7 +40,7 @@ namespace Dem.Services.DbServices
         }
         public Supplier GetWithDetailsAsync(Guid id)
         {
-            Supplier? supplier = _db.Suppliers.Include(p => p.Materials).FirstOrDefault();
+            Supplier? supplier = _db.Suppliers.Include(p => p.Materials).FirstOrDefault(p => p.Id == id);
 
             return supplier == null ? throw new SupplierNotFoundException(id) : supplier;
         }

@@ -54,14 +54,14 @@ namespace Dem.ViewModels
         public ICommand SaveRequestCommand { get; }
         public ICommand CancelWindowCommand { get; }
 
-        private MakeRequestViewModel(IRequestService requestService, IProductService productService, IPartnerService partnerService, NavigationService<RequestListViewModel> navigationProductListService)
+        private MakeRequestViewModel(IRequestService requestService, IProductService productService, IPartnerService partnerService, INavigationService<RequestListViewModel> navigationProductListService)
         {
             _requestService = requestService;
             _productService = productService;
             _partnerService = partnerService;
 
 
-            SaveRequestCommand = new SaveRequestCommand(requestService, this);
+            SaveRequestCommand = new SaveRequestCommand(requestService, productService, this, navigationProductListService);
             CancelWindowCommand = new NavigateCommand<RequestListViewModel>(navigationProductListService);
 
             Id = Guid.NewGuid();

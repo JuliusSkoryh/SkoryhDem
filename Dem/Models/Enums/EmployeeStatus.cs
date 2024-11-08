@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dem.Models.Enums
 {
-    public enum OperationType
+    public enum EmployeeStatus
     {
-        Addition,
-        Subtraction
+        common,
+        manager
     }
 }

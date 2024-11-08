@@ -6,6 +6,7 @@ using Dem.Services.DbServices.DbServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,7 +86,7 @@ namespace Dem.ViewModels
             }
         }
 
-        public ObservableCollection<Material?> Materials { get; private set; }
+        public ObservableCollection<MaterialViewModel?> Materials { get; private set; }
 
         private ObservableCollection<Material> _materialsSelected;
         public ObservableCollection<Material> MaterialsSelected
@@ -126,16 +127,28 @@ namespace Dem.ViewModels
         {
             try
             {
-                _product = _productService.GetAsync(Id);
+                _product = _productService.GetWithDetailsAsync(Id);
+                var allMaterials = _materialService.GetAllAsync();
+
+                Materials = new ObservableCollection<MaterialViewModel?>(
+                    allMaterials.Select(m =>
+                    {
+                        var viewModel = new MaterialViewModel(m)
+                        {
+                            IsSelected = _product.Materials.Contains(m)
+                        };
+                        viewModel.PropertyChanged += OnMaterialSelectionChanged;
+                        return viewModel;
+                    })
+                );
+
+                MaterialsSelected = new ObservableCollection<Material>(_product.Materials);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
                 CancelWindowCommand.Execute(null);
-            }
-            Materials = new ObservableCollection<Material?>(_materialService.GetAllAsync());
-            //MaterialsSelected = _product.Materials.FirstOrDefault();
-            MaterialsSelected = new ObservableCollection<Material?>();
+            }            
         }
 
         public static ProductEditViewModel CreateAsync(Guid? id, IProductService productService, IMaterialService materialService, NavigationService<ProductListViewModel> navigationProductListService)
@@ -151,12 +164,34 @@ namespace Dem.ViewModels
             {
                 MaterialsSelected.Add(material);
             }
+            else
+            {
+                MaterialsSelected.Remove(material);
+            }
         }
 
         private void IdIsNull()
         {
             MessageBox.Show("Что-то явно пошло не так", "Error");
             CancelWindowCommand.Execute(null);
+        }
+
+        private void OnMaterialSelectionChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(MaterialViewModel.IsSelected) && sender is MaterialViewModel materialVm)
+            {
+                if (materialVm.IsSelected)
+                {
+                    if (!MaterialsSelected.Contains(materialVm.Material))
+                    {
+                        MaterialsSelected.Add(materialVm.Material);
+                    }
+                }
+                else
+                {
+                    MaterialsSelected.Remove(materialVm.Material);
+                }
+            }
         }
     }
 }

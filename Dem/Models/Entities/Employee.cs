@@ -16,11 +16,12 @@ namespace Dem.Models.Entities
         public HealhStatus HealhStatus { get; set; }
         public string JobTitle { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string Password { get; set; }        
+        public EmployeeStatus EmployeeStatus { get; set; }
 
         private Employee() { }
 
-        public Employee(Guid id, string fullName, DateOnly dateOfBirth, bool haveFamily, HealhStatus healhStatus, string jobTitle, string email, string password) : base(id)
+        public Employee(Guid id, string fullName, DateOnly dateOfBirth, bool haveFamily, HealhStatus healhStatus, string jobTitle, string email, string password, EmployeeStatus employeeStatus) : base(id)
         {
             FullName = fullName;
             DateOfBirth = dateOfBirth;
@@ -29,6 +30,7 @@ namespace Dem.Models.Entities
             JobTitle = jobTitle;
             Email = email;
             Password = password;
+            EmployeeStatus = employeeStatus;
         }
     }
 }

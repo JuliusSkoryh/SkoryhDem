@@ -36,7 +36,7 @@ namespace Dem.Services.DbServices
         }
         public Request GetWithDetailsAsync(Guid id)
         {
-            Request? request = _db.Requests.Include(p => p.Partner).Include(p => p.Product).FirstOrDefault();
+            Request? request = _db.Requests.Include(p => p.Partner).Include(p => p.Product).FirstOrDefault(p => p.Id == id);
 
             return request == null ? throw new RequestNotFoundException(id) : request;
         }

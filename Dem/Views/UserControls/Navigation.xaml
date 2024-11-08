@@ -33,6 +33,12 @@
                 Content="Продукция"
                 Margin="10 4"
                 Command="{Binding NavigateProductListCommand}"/>
+            <Button 
+                x:Name="NavPartnerList"
+                Style="{StaticResource NavButton}"
+                Content="Партнеры"
+                Margin="10 4"
+                Command="{Binding NavigatePartnerListCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

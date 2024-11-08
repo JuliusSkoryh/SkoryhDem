@@ -40,8 +40,18 @@
                 Margin="5"
                 Width="200"
                 ItemsSource="{Binding Products}"
-                DisplayMemberPath="Name"
-                SelectedItem="{Binding SelectedProduct}" />
+                SelectedItem="{Binding SelectedProduct}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="   " />
+                            <TextBlock Text="{Binding QuantityInStorage}" />
+                            <TextBlock Text=" упаковок на складе" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
         
         <StackPanel Grid.Row="2" HorizontalAlignment="Left">
@@ -61,7 +71,7 @@
                 Width="200"
                 ItemsSource="{Binding Partners}"
                 DisplayMemberPath="Name"
-                SelectedItem="{Binding SelectedPartner}" />
+                SelectedItem="{Binding SelectedPartner}"/>
         </StackPanel>
         
         <StackPanel Grid.Row="7" Margin="10 0" Orientation="Horizontal">

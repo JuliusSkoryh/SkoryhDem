@@ -50,17 +50,6 @@ namespace Dem
                 services.AddTransient<IPartnerService, PartnerService>();
                 services.AddTransient<ISupplierService, SupplierService>();
 
-                //services.AddAsyncNavigationService<ProductListViewModel>(async (s, param) =>
-                //{
-                //    var navBar = s.GetRequiredService<NavigationBarViewModel>();
-                //    var productService = s.GetRequiredService<IProductService>();
-                //    var addProducNavigationService = s.GetRequiredService<NavigationService<AddProductViewModel>>();
-                //    var productEditNavigationService = s.GetRequiredService<NavigationService<ProductEditViewModel>>();
-
-                //    return await ProductListViewModel.CreateAsync(navBar, productService, addProducNavigationService, productEditNavigationService);
-                //});
-
-
 
 
                 services.AddTransient<ProductListViewModel>(s =>
@@ -90,10 +79,38 @@ namespace Dem
                 });
 
 
+                // посмотри связь ProductList and ProductEdit  видемо надо убрать доп nav service
 
 
 
-                
+                services.AddTransient<PartnerListViewModel>(s =>
+                {
+                    var navBar = s.GetRequiredService<NavigationBarViewModel>();
+                    var partnerService = s.GetRequiredService<IPartnerService>();
+                    var addPartnerNavigationService = s.GetRequiredService<NavigationService<AddPartnerViewModel>>();
+                    var editPartnerNavigationService = s.GetRequiredService<NavigationService<EditPartnerViewModel>>();
+
+                    return PartnerListViewModel.CreateAsync(navBar, partnerService, addPartnerNavigationService, editPartnerNavigationService);
+                });
+                services.AddSingleton<NavigationService<PartnerListViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    Func<object?, PartnerListViewModel> viewModelFactory = parameter =>
+                    {
+                        var navBar = s.GetRequiredService<NavigationBarViewModel>();
+                        var partnerService = s.GetRequiredService<IPartnerService>();
+                        var addPartnerNavigationService = s.GetRequiredService<NavigationService<AddPartnerViewModel>>();
+                        var editPartnerNavigationService = s.GetRequiredService<NavigationService<EditPartnerViewModel>>();
+
+                        return PartnerListViewModel.CreateAsync(navBar, partnerService, addPartnerNavigationService, editPartnerNavigationService);
+                    };
+
+                    return new NavigationService<PartnerListViewModel>(navigationStore, viewModelFactory);
+                });
+
+
+
                 services.AddTransient(s =>
                 {
                     var productService = s.GetRequiredService<IProductService>();
@@ -123,6 +140,33 @@ namespace Dem
                 });
 
 
+
+
+                services.AddTransient<AddPartnerViewModel>(s =>
+                {
+                    var partnerService = s.GetRequiredService<IPartnerService>();
+                    var navigationService = s.GetRequiredService<NavigationService<PartnerListViewModel>>();
+
+                    return new AddPartnerViewModel(partnerService, navigationService);
+                });
+                services.AddSingleton<NavigationService<AddPartnerViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    Func<object?, AddPartnerViewModel> viewModelFactory = parameter =>
+                    {
+                        var partnerService = s.GetRequiredService<IPartnerService>();
+                        var navigationService = s.GetRequiredService<NavigationService<PartnerListViewModel>>();
+
+                        return new AddPartnerViewModel(partnerService, navigationService);
+                    };
+
+                    return new NavigationService<AddPartnerViewModel>(navigationStore, viewModelFactory);
+                });
+
+
+
+
                 services.AddTransient<MakeRequestViewModel>(s =>
                 {
                     var requestService = s.GetRequiredService<IRequestService>();
@@ -130,9 +174,8 @@ namespace Dem
                     var partnerService = s.GetRequiredService<IPartnerService>();
 
                     var navigationService = s.GetRequiredService<NavigationService<RequestListViewModel>>();
-                    var productNavigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
 
-                    return Task.Run(() => MakeRequestViewModel.CreateAsync(requestService, productService, partnerService, navigationService)).GetAwaiter().GetResult();
+                    return MakeRequestViewModel.CreateAsync(requestService, productService, partnerService, navigationService);
                 });
                 services.AddSingleton<NavigationService<MakeRequestViewModel>>(s =>
                 {
@@ -159,7 +202,7 @@ namespace Dem
                     var navigationBarViewModel = s.GetRequiredService<NavigationBarViewModel>();
                     var requestService = s.GetRequiredService<IRequestService>();
                     var makeRequestNavigationService = s.GetRequiredService<NavigationService<MakeRequestViewModel>>();
-                    var closeRequestCommand = s.GetRequiredService<CloseRequestCommand>();
+                    var closeRequestCommand = s.GetRequiredService<NavigationService<RequestListViewModel>>();
 
                     return RequestListViewModel.CreateAsync(navigationBarViewModel, requestService, makeRequestNavigationService, closeRequestCommand);
                 });
@@ -171,9 +214,77 @@ namespace Dem
                         var navigationBar = s.GetRequiredService<NavigationBarViewModel>();
                         var requestService = s.GetRequiredService<IRequestService>();
                         var makeRequestNavigationService = s.GetRequiredService<NavigationService<MakeRequestViewModel>>();
-                        return RequestListViewModel.CreateAsync(navigationBar, requestService, makeRequestNavigationService, s.GetRequiredService<CloseRequestCommand>());
+                        return RequestListViewModel.CreateAsync(navigationBar, requestService, makeRequestNavigationService, s.GetRequiredService<NavigationService<RequestListViewModel>>());
                     });
                 });
+
+
+                services.AddTransient<EmploeeListViewModel>(s =>
+                {
+                    var navigationBarViewModel = s.GetRequiredService<NavigationBarViewModel>();
+                    var employeeService = s.GetRequiredService<IEmployeeService>();
+                    var addEmployeeNavigationService = s.GetRequiredService<NavigationService<AddEmployeeViewModel>>();
+                    var editEmployeeNavigationService = s.GetRequiredService<NavigationService<EditEmployeeViewModel>>();
+
+                    return EmploeeListViewModel.CreateAsync(navigationBarViewModel, employeeService, addEmployeeNavigationService, editEmployeeNavigationService);
+                });
+                services.AddSingleton<NavigationService<EmploeeListViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+                    return new NavigationService<EmploeeListViewModel>(navigationStore, parameter =>
+                    {
+                        var navigationBarViewModel = s.GetRequiredService<NavigationBarViewModel>();
+                        var employeeService = s.GetRequiredService<IEmployeeService>();
+                        var addEmployeeNavigationService = s.GetRequiredService<NavigationService<AddEmployeeViewModel>>();
+                        var editEmployeeNavigationService = s.GetRequiredService<NavigationService<EditEmployeeViewModel>>();
+
+                        return EmploeeListViewModel.CreateAsync(navigationBarViewModel, employeeService, addEmployeeNavigationService, editEmployeeNavigationService);
+                    });
+                });
+
+
+
+
+                services.AddTransient<AddEmployeeViewModel>(s =>
+                {
+                    var employeeService = s.GetRequiredService<IEmployeeService>();
+                    var navigationService = s.GetRequiredService<NavigationService<EmploeeListViewModel>>();
+
+                    return AddEmployeeViewModel.CreateAsync(employeeService, navigationService);
+                });
+                services.AddSingleton<NavigationService<AddEmployeeViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    Func<object?, AddEmployeeViewModel> viewModelFactory = parameter =>
+                    {
+                        var employeeService = s.GetRequiredService<IEmployeeService>();
+                        var navigationService = s.GetRequiredService<NavigationService<EmploeeListViewModel>>();
+
+                        return AddEmployeeViewModel.CreateAsync(employeeService, navigationService);
+                    };
+
+                    return new NavigationService<AddEmployeeViewModel>(navigationStore, viewModelFactory);
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 //services.AddSingleton<NavigationService<RequestListViewModel>>(s =>
                 //{
                 //    var navigationStore = s.GetRequiredService<NavigationStore>();
@@ -219,7 +330,7 @@ namespace Dem
                         var id = parameter as Guid?;
                         if (id == null)
                         {
-                            throw new ArgumentException("Product ID is required to create ProductEditViewModel");
+                            throw new ArgumentException("Отсутствует Id продукта");
                         }
 
                         var productService = s.GetRequiredService<IProductService>();
@@ -230,13 +341,51 @@ namespace Dem
                     });
                 });
 
+                services.AddSingleton<NavigationService<EditPartnerViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    return new NavigationService<EditPartnerViewModel>(navigationStore, parameter =>
+                    {
+                        var id = parameter as Guid?;
+                        if (id == null)
+                        {
+                            throw new ArgumentException("Отсутствует Id партнера");
+                        }
+
+                        var partnerService = s.GetRequiredService<IPartnerService>();
+                        var navigationService = s.GetRequiredService<NavigationService<PartnerListViewModel>>();
+
+                        return EditPartnerViewModel.CreateAsync((Guid)id, partnerService, navigationService);
+                    });
+                });
+
+                services.AddSingleton<NavigationService<EditEmployeeViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    return new NavigationService<EditEmployeeViewModel>(navigationStore, parameter =>
+                    {
+                        var id = parameter as Guid?;
+                        if (id == null)
+                        {
+                            throw new ArgumentException("Отсутствует Id работника");
+                        }
+
+                        var employeeService = s.GetRequiredService<IEmployeeService>();
+                        var navigationService = s.GetRequiredService<NavigationService<EmploeeListViewModel>>();
+
+                        return EditEmployeeViewModel.CreateAsync((Guid)id, employeeService, navigationService);
+                    });
+                });
 
 
                 services.AddTransient<NavigationBarViewModel>(s =>
                 {
                     return new NavigationBarViewModel(
                         s.GetRequiredService<NavigationService<ProductListViewModel>>(),
-                        s.GetRequiredService<NavigationService<RequestListViewModel>>());
+                        s.GetRequiredService<NavigationService<RequestListViewModel>>(),
+                        s.GetRequiredService<NavigationService<PartnerListViewModel>>());
                 });
 
                 services.AddSingleton<MainWindow>();

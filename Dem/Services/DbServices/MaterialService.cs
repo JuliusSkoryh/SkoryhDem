@@ -35,7 +35,7 @@ namespace Dem.Services.DbServices
         }
         public Material GetWithDetailsAsync(Guid id)
         {
-            Material? material = _db.Materials.Include(p => p.Supplier).Include(p => p.Products).FirstOrDefault();
+            Material? material = _db.Materials.Include(p => p.Supplier).Include(p => p.Products).FirstOrDefault(p => p.Id == id);
             return material == null ? throw new MaterialNotFoundException(id) : material;
         }
 

@@ -24,29 +24,28 @@ namespace Dem.Views.UserControls
     {
         public ProductEdit()
         {
-            DataContextChanged += EditProduct_DataContextChanged;
-
+            //DataContextChanged += EditProduct_DataContextChanged;
             InitializeComponent();
         }
 
-        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is ListBox listBox && listBox.SelectedItem is Material selectedMaterial)
-            {
-                var viewModel = (ProductEditViewModel)DataContext;
-                viewModel.AddSelectedMaterial(selectedMaterial);
-            }
-        }
+        //private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (sender is ListBox listBox && listBox.SelectedItem is Material selectedMaterial)
+        //    {
+        //        var viewModel = (ProductEditViewModel)DataContext;
+        //        viewModel.AddSelectedMaterial(selectedMaterial);
+        //    }
+        //}
 
-        private void EditProduct_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (DataContext is ProductEditViewModel viewModel)
-            {
-                foreach (var material in viewModel.MaterialsSelected)
-                {
-                    MaterialsListBox.SelectedItems.Add(material);
-                }
-            }
-        }
+        //private void EditProduct_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (DataContext is ProductEditViewModel viewModel)
+        //    {
+        //        foreach (var material in viewModel.MaterialsSelected)
+        //        {
+        //            MaterialsListBox.SelectedItems.Add(material);
+        //        }
+        //    }
+        //}
     }
 }

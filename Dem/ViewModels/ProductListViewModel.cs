@@ -48,7 +48,7 @@ namespace Dem.ViewModels
             ICollection<Product>? products = _productService.GetAllWithDetailsAsync();
             foreach (var product in products)
             {
-                _productViewModels.Add(new ProductViewModel(product, productEditNavigationService));
+                _productViewModels.Add(new ProductViewModel(product, productEditNavigationService, _productService));
             }
         }
     }

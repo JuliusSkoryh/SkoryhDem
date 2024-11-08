@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ProductListViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Border Padding="10">        
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -29,7 +30,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Продукты" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5"/>
-                    <Button Grid.Column="1" Style="{StaticResource NavButton}" Content="Добавить продукт" HorizontalAlignment="Right" Margin="10 5" Command="{Binding AddProductNavigateCommand}"/>
+                    <Button Grid.Column="1" Style="{StaticResource FormButton}" Content="Добавить продукт" HorizontalAlignment="Right" Margin="10 10" Command="{Binding AddProductNavigateCommand}"/>
                 </Grid>
             </Border>
 
@@ -49,11 +50,11 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
+                                <StackPanel Grid.Column="0" Margin="10 4">
                                     <TextBlock Text="Тип продукта"/>
                                     <TextBlock Text="{Binding Type}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Column="1">
+                                <StackPanel Grid.Column="1" Margin="10 4">
                                     <TextBlock Text="Наименование продукта"/>
                                     <TextBlock Text="{Binding Name}"/>
                                 </StackPanel>
@@ -65,11 +66,11 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
+                                <StackPanel Grid.Column="0" Margin="10 4">
                                     <TextBlock Text="Артикль"/>
                                     <TextBlock Text="{Binding Article}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Column="1">
+                                <StackPanel Grid.Column="1" Margin="10 4">
                                     <TextBlock Text="Номер стандарта"/>
                                     <TextBlock Text="{Binding StandartNumber}"/>
                                 </StackPanel>
@@ -79,13 +80,15 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 4">
                                     <TextBlock Text="Цена: "/>
                                     <TextBlock Text="{Binding Cost}"/>
                                 </StackPanel>
-                                <Button Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource FormButton}" Content="Редактировать" Command="{Binding EditProductCommand}"/>
+                                <Button Grid.Column="2" HorizontalAlignment="Right" Margin="10 4" Style="{StaticResource FormButton}" Content="Редактировать" Command="{Binding EditProductCommand}"/>
+                                <Button Style="{StaticResource FormButton}" Margin="10 4" Content="Добавить продукцию на склад" Command="{Binding AddQuantityOfProductInStorageCommand}" />
                             </Grid>
                         </Grid>
                     </DataTemplate>
@@ -93,4 +96,5 @@
             </ListView>
         </Grid>
     </Grid>
+    </Border>
 </UserControl>

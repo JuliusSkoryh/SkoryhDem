@@ -24,7 +24,7 @@ namespace Dem.Models.Entities
 
         private Partner() { }
 
-        public Partner(Guid id, string type, string name, string director, string email, string phone, string legalAddress, string tIN, Rating rating, byte[] logo) : base(id)
+        public Partner(Guid id, string type, string name, string director, string email, string phone, string legalAddress, string tIN, Rating rating, byte[]? logo) : base(id)
         {
             Type = type;
             Name = name;

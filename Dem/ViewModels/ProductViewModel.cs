@@ -2,6 +2,7 @@
 using Dem.Models.Entities;
 using Dem.Primitives;
 using Dem.Services;
+using Dem.Services.DbServices.DbServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,7 +21,7 @@ namespace Dem.ViewModels
 
         private readonly Product _product;
 
-        private ObservableCollection<Material>? _materials;
+        private ObservableCollection<MaterialViewModel>? _materials;
         private ObservableCollection<Request>? _requests;
 
 
@@ -93,7 +94,7 @@ namespace Dem.ViewModels
             }
         }
 
-        public ObservableCollection<Material>? Materials
+        public ObservableCollection<MaterialViewModel>? Materials
         {
             get => _materials;
             set
@@ -114,8 +115,9 @@ namespace Dem.ViewModels
         }
 
         public ICommand EditProductCommand { get; }
+        public ICommand AddQuantityOfProductInStorageCommand { get; }
 
-        public ProductViewModel(Product product, NavigationService<ProductEditViewModel> productEditNavigationService)
+        public ProductViewModel(Product product, NavigationService<ProductEditViewModel> productEditNavigationService, IProductService productService)
         {
             _product = product;
 
@@ -124,12 +126,13 @@ namespace Dem.ViewModels
             // DI id навигация с параметром, асинхронная фабрика создания 
 
             EditProductCommand = new NavigateCommand<ProductEditViewModel>(productEditNavigationService, _product.Id);
+            AddQuantityOfProductInStorageCommand = new AddQuantityOfProductInStorageCommand(productService, _product.Id);
         }
 
         private void Initialize()
         {
 
-            _materials = new ObservableCollection<Material>(_product.Materials);
+            _materials = new ObservableCollection<MaterialViewModel>(_product.Materials.Select(m => new MaterialViewModel(m)));
 
             if(_requests == null || !_requests.Any())
             {

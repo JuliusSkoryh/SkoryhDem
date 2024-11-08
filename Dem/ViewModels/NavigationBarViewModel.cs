@@ -15,11 +15,15 @@ namespace Dem.ViewModels
     {
         public ICommand NavigateProductListCommand { get; }
         public ICommand NavigateRequestListCommand { get; }
+        public ICommand NavigatePartnerListCommand { get; }
 
-        public NavigationBarViewModel(INavigationService<ProductListViewModel> navigateProductListService, INavigationService<RequestListViewModel> navigateRequestListService)
+
+        public NavigationBarViewModel(INavigationService<ProductListViewModel> navigateProductListService, INavigationService<RequestListViewModel> navigateRequestListService,
+            INavigationService<PartnerListViewModel> navigatePartnerListService)
         {
             NavigateProductListCommand = new NavigateCommand<ProductListViewModel>(navigateProductListService);
             NavigateRequestListCommand = new NavigateCommand<RequestListViewModel>(navigateRequestListService);
+            NavigatePartnerListCommand = new NavigateCommand<PartnerListViewModel>(navigatePartnerListService);
         }
     }
 }

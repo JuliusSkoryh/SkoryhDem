@@ -18,7 +18,7 @@ namespace Dem.Commands
         private ProductEditViewModel _productEditViewModel;
         private readonly INavigationService<ProductListViewModel> _navigationService;
 
-        public DeleteProductCommand(IProductService productService, ProductEditViewModel productEditViewModel, INavigationService<ProductListViewModel> navigationService = null)
+        public DeleteProductCommand(IProductService productService, ProductEditViewModel productEditViewModel, INavigationService<ProductListViewModel> navigationService)
         {
             _productService = productService;
             _productEditViewModel = productEditViewModel;
@@ -39,6 +39,7 @@ namespace Dem.Commands
             {
                 _productService.DeleteAsync(_productEditViewModel.Id);
                 MessageBox.Show("Продукт успешно удален", "Success");
+                _navigationService.Navigate(null);
             }
             catch (Exception ex)
             {

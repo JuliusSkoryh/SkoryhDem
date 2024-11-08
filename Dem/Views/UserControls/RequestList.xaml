@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:RequestListViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Border Padding="10">        
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -15,29 +16,30 @@
 
         <nav:Navigation DataContext="{Binding NavigationBarViewModel}"/>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="#0D58A6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Background="GreenYellow">
+            <Border Grid.Row="0" Background="#8B6ED7">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Заказы" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5"/>
-                    <Button Grid.Column="1" Style="{StaticResource NavButton}" Content="Создать заказ" HorizontalAlignment="Right" Margin="10 5" Command="{Binding MakeRequestNavigateCommand}"/>
+                    <TextBlock Grid.Column="0" Text="Заказы" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 10"/>
+                        <Button Grid.Column="1" Style="{StaticResource FormButton}" Background="#FF9900" Content="Создать заказ" HorizontalAlignment="Right" Margin="10 5" Command="{Binding MakeRequestNavigateCommand}"/>
                 </Grid>
             </Border>
 
             <ListView Grid.Row="1" ItemsSource="{Binding Requests}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Background="#FFE140">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -49,11 +51,11 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
+                                <StackPanel Grid.Column="0" Margin="10 4">
                                     <TextBlock Text="Наименование продукта"/>
                                     <TextBlock Text="{Binding Product.Name}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Column="1">
+                                <StackPanel Grid.Column="1" Margin="10 4">
                                     <TextBlock Text="Количество продукции"/>
                                     <TextBlock Text="{Binding QuantityOfProduct}"/>
                                 </StackPanel>
@@ -65,31 +67,33 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
+                                <StackPanel Grid.Column="0" Margin="10 4">
                                     <TextBlock Text="Дата создания"/>
                                     <TextBlock Text="{Binding DateOfCreation}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="Номер стандарта"/>
+                                <StackPanel Grid.Column="1" Margin="10 4">
+                                    <TextBlock Text="Дата закрытия"/>
                                     <TextBlock Text="{Binding DateOfClosing}"/>
                                 </StackPanel>
                             </Grid>
 
-                            <Grid>
+                            <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <StackPanel Grid.Column="0" Margin="10 4" Orientation="Horizontal" HorizontalAlignment="Left">
                                     <TextBlock Text="Стоимость заказа: "/>
                                     <TextBlock Text="{Binding Price}"/>
                                 </StackPanel>
                             </Grid>
+                            <Button Style="{StaticResource FormButton}" Grid.Row="3" Margin="10 4" HorizontalAlignment="Left" Command="{Binding CloseRequest}" Content="Закрыть заказ"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </Grid>
+    </Border>
 </UserControl>

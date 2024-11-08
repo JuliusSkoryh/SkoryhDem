@@ -94,8 +94,9 @@
         
         <StackPanel Grid.Row="6" Margin="10">
             <TextBlock Text="Materials" FontSize="16" FontWeight="Bold" Margin="0,10,0,5"/>
-            <ListBox x:Name="MaterialsListBox" ItemsSource="{Binding Materials}" 
+            <!--<ListBox x:Name="MaterialsListBox" ItemsSource="{Binding Materials}" 
              SelectionMode="Multiple"
+             SelectedItem="{Binding MaterialsSelected}"
              MouseDoubleClick="ListBox_MouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -116,7 +117,16 @@
                         </Style.Triggers>
                     </Style>
                 </ListBox.ItemContainerStyle>
-            </ListBox>
+            </ListBox>-->
+            <ItemsControl ItemsSource="{Binding Materials}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
         
         

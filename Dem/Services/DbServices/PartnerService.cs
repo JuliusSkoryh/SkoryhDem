@@ -4,11 +4,13 @@ using Dem.Models.Entities;
 using Dem.Primitives;
 using Dem.Services.DbServices.DbServiceInterfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Dem.Services.DbServices
@@ -41,13 +43,16 @@ namespace Dem.Services.DbServices
         }
         public Partner GetWithDetailsAsync(Guid id)
         {
-            Partner? partner = _db.Partners.Include(p => p.Requests).Include(p => p.Rating).FirstOrDefault();
+            Partner? partner = _db.Partners.Include(p => p.Requests).FirstOrDefault(p => p.Id == id);
 
             return partner == null ? throw new PartnerNotFoundException(id) : partner;
         }
 
         private void ValidatePartner(Partner partner)
         {
+            string phonePattern = @"^\+?[1-9]\d{1,14}$";
+            Regex phoneRegex = new Regex(phonePattern);
+
             if (partner == null)
             {
                 throw new InvalidPartnerException();
@@ -60,7 +65,8 @@ namespace Dem.Services.DbServices
                 || String.IsNullOrEmpty(partner.Phone)
                 || String.IsNullOrEmpty(partner.LegalAddress)
                 || String.IsNullOrEmpty(partner.TIN)
-                || !MailAddress.TryCreate(partner.Email, out MailAddress? address))
+                || !MailAddress.TryCreate(partner.Email, out MailAddress? address)
+                || phoneRegex.IsMatch(partner.Phone))
             {
                 throw new InvalidPartnerException();
             }
