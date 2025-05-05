@@ -39,6 +39,18 @@
                 Content="Партнеры"
                 Margin="10 4"
                 Command="{Binding NavigatePartnerListCommand}"/>
+            <Button 
+                x:Name="NavEmployeeList"
+                Style="{StaticResource NavButton}"
+                Content="Работники"
+                Margin="10 4"
+                Command="{Binding NavigateEmployeeListCommand}"/>
+            <Button 
+                x:Name="NavMaterialList"
+                Style="{StaticResource NavButton}"
+                Content="Материалы"
+                Margin="10 4"
+                Command="{Binding NavigateMaterialListCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

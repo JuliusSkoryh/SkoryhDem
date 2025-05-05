@@ -26,7 +26,7 @@ namespace Dem.Commands
 
         public async override Task ExecuteAsync(object parameter)
         {
-            var product = _productService.GetAsync(_productId);
+            var product = _productService.Get(_productId);
 
             if (product == null)
             {
@@ -45,7 +45,7 @@ namespace Dem.Commands
                 }
 
                 product.QuantityInStorage = count;
-                _productService.UpdateAsync(product);
+                _productService.Update(product);
             }            
         }
     }

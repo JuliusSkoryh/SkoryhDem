@@ -16,29 +16,29 @@ namespace Dem.Services.DbServices
     {
         public ProductService(ApplicationDbContext db) : base(db) { }
 
-        public override void AddAsync(Product product)
+        public override void Add(Product product)
         {
             ValidateProduct(product);
-            base.AddAsync(product);
+            base.Add(product);
         }
 
-        public override void UpdateAsync(Product product)
+        public override void Update(Product product)
         {
             ValidateProduct(product);
-            base.UpdateAsync(product);
+            base.Update(product);
         }
-        public ICollection<Product> GetAllWithDetailsAsync()
+        public List<Product> GetAllWithDetails()
         {
             return _db.Products.Include(p => p.Materials).Include(p => p.Requests).ToList();
         }
 
-        public Product GetAsync(Guid id)
+        public Product Get(Guid id)
         {
-            Product? product = GetByIdAsync(id);
+            Product? product = GetById(id);
 
             return product == null ? throw new ProductNotFoundException(id) : product;
         }
-        public Product GetWithDetailsAsync(Guid id)
+        public Product GetWithDetails(Guid id)
         {
             Product? product = _db.Products.Include(p => p.Materials).Include(p => p.Requests).FirstOrDefault(p => p.Id == id);
 

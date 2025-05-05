@@ -132,17 +132,7 @@
                     Width="130"
                     ItemsSource="{Binding Ratings}"
                     SelectedItem="{Binding SelectedRating, Mode=TwoWay}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0}">
-                                        <Binding Path="." />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                    
                 </ComboBox>
             </StackPanel>
         </Grid>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,31 +17,32 @@ namespace Dem.Primitives
             _db = db;
         }
 
-        public virtual ICollection<TEntity> GetAllAsync()
+        public virtual List<TEntity> GetAll()
         {
             return  _db.Set<TEntity>().ToList();
         }
 
-        public virtual TEntity? GetByIdAsync(Guid id)
+        public virtual TEntity? GetById(Guid id)
         {
             return _db.Set<TEntity>().Find(id);
         }
 
-        public virtual void AddAsync(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             _db.Set<TEntity>().Add(entity);
             _db.SaveChanges();
         }
 
-        public virtual void UpdateAsync(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
-            _db.Update<TEntity>(entity);
+            _db.Attach(entity);
+            _db.Entry(entity).State = EntityState.Modified;
             _db.SaveChanges();
         }
 
-        public virtual void DeleteAsync(Guid id)
+        public virtual void Delete(Guid id)
         {
-            var entity = GetByIdAsync(id);
+            var entity = GetById(id);
             if (entity != null)
             {
                 _db.Set<TEntity>().Remove(entity);

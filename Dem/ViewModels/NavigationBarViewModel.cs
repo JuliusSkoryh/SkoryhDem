@@ -1,13 +1,7 @@
 ﻿using Dem.Commands;
 using Dem.Primitives;
 using Dem.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace Dem.ViewModels
 {
@@ -16,14 +10,20 @@ namespace Dem.ViewModels
         public ICommand NavigateProductListCommand { get; }
         public ICommand NavigateRequestListCommand { get; }
         public ICommand NavigatePartnerListCommand { get; }
+        public ICommand NavigateEmployeeListCommand { get; }
+        public ICommand NavigateMaterialListCommand { get; }
+
 
 
         public NavigationBarViewModel(INavigationService<ProductListViewModel> navigateProductListService, INavigationService<RequestListViewModel> navigateRequestListService,
-            INavigationService<PartnerListViewModel> navigatePartnerListService)
+            INavigationService<PartnerListViewModel> navigatePartnerListService, INavigationService<EmploeeListViewModel> navigateEmployeeListService, INavigationService<MaterialListViewModel> navigateMaterialListService)
         {
             NavigateProductListCommand = new NavigateCommand<ProductListViewModel>(navigateProductListService);
             NavigateRequestListCommand = new NavigateCommand<RequestListViewModel>(navigateRequestListService);
             NavigatePartnerListCommand = new NavigateCommand<PartnerListViewModel>(navigatePartnerListService);
+            NavigateEmployeeListCommand = new NavigateCommand<EmploeeListViewModel>(navigateEmployeeListService);
+            NavigateMaterialListCommand = new NavigateCommand<MaterialListViewModel>(navigateMaterialListService);
+
         }
     }
 }

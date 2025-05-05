@@ -11,14 +11,14 @@ namespace Dem.Services.DbServices.DbServiceInterfaces
 {
     public interface IProductService
     {
-        public void AddAsync(Product product);
-        public void UpdateAsync(Product product);
-        public void DeleteAsync(Guid id);
+        public void Add(Product product);
+        public void Update(Product product);
+        public void Delete(Guid id);
 
-        public ICollection<Product> GetAllAsync();
-        public  ICollection<Product> GetAllWithDetailsAsync();
+        public List<Product> GetAll();
+        public List<Product> GetAllWithDetails();
 
-        public Product GetAsync(Guid id);
-        public Product GetWithDetailsAsync(Guid id);
+        public Product Get(Guid id);
+        public Product GetWithDetails(Guid id);
     }
 }

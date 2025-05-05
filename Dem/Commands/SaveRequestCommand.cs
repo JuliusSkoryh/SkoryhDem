@@ -44,11 +44,11 @@ namespace Dem.Commands
                 var request = new Request(_makeRequestViewModel.Id, _makeRequestViewModel.QuantityOfProduct, price, dateOfCreation,
                     _makeRequestViewModel.IsPrepayment, _makeRequestViewModel.SelectedProduct.Id, _makeRequestViewModel.SelectedPartner.Id, null);
 
-                _requestService.AddAsync(request);
+                _requestService.Add(request);
 
-                var product = _productService.GetAsync(_makeRequestViewModel.SelectedProduct.Id);
+                var product = _productService.Get(_makeRequestViewModel.SelectedProduct.Id);
                 product.QuantityInStorage -= _makeRequestViewModel.QuantityOfProduct;
-                _productService.UpdateAsync(product);
+                _productService.Update(product);
 
                 MessageBox.Show("Заказ успешно создан", "Success");
 

@@ -69,8 +69,8 @@ namespace Dem.ViewModels
 
         private void InitializeAsync()
         {
-            Products = new ObservableCollection<Product>(_productService.GetAllAsync());
-            Partners = new ObservableCollection<Partner>(_partnerService.GetAllAsync());
+            Products = new ObservableCollection<Product>(_productService.GetAll());
+            Partners = new ObservableCollection<Partner>(_partnerService.GetAll());
         }
 
         public static MakeRequestViewModel CreateAsync(

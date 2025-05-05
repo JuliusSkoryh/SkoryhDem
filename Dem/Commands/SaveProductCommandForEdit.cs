@@ -27,7 +27,7 @@ namespace Dem.Commands
 
             try
             {
-                var product = _productService.GetAsync(_productEditViewModel.Id);
+                var product = _productService.Get(_productEditViewModel.Id);
 
                 if (product != null)
                 {
@@ -39,7 +39,7 @@ namespace Dem.Commands
                     product.Cost = _productEditViewModel.Cost;
                     product.Materials = _productEditViewModel.MaterialsSelected;
 
-                    _productService.UpdateAsync(product);
+                    _productService.Update(product);
                     MessageBox.Show("Продукт успешно изменён", "Success");
                 }                
             }

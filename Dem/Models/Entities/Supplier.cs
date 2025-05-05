@@ -17,11 +17,11 @@ namespace Dem.Models.Entities
 
         private Supplier() { }
 
-        public Supplier(Guid id, string name, string type, string tIN) : base(id)
+        public Supplier(Guid id, string name, string type, string tin) : base(id)
         {
             Name = name;
             Type = type;
-            TIN = tIN;
+            TIN = tin;
         }
     }
 }

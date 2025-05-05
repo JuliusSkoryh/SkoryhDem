@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Dem.Commands
 {
@@ -28,11 +29,13 @@ namespace Dem.Commands
 
         public async override Task ExecuteAsync(object parameter)
         {
-            var partner = new Partner(Guid.NewGuid(), _viewModel.Type, _viewModel.Name, _viewModel.Director, _viewModel.Email, _viewModel.Phone, _viewModel.LegalAddress, _viewModel.TIN, Models.Enums.Rating.medium, null);
+            int defaultRating = 5;
+            var partner = new Partner(Guid.NewGuid(), _viewModel.Type, _viewModel.Name, _viewModel.Director, _viewModel.Email,
+                _viewModel.Phone, _viewModel.LegalAddress, _viewModel.TIN, defaultRating, null);
 
             try
             {
-                _partnerService.AddAsync(partner);
+                _partnerService.Add(partner);
                 MessageBox.Show("Партнер успешно добавлен в базу данных", "Success");
                 _navigationService.Navigate(null);
             }

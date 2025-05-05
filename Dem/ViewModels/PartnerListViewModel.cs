@@ -42,7 +42,7 @@ namespace Dem.ViewModels
         {
             _partnerViewModels = new ObservableCollection<PartnerViewModel>();
 
-            ICollection<Partner>? partners = _partnerService.GetAllWithDetailsAsync();
+            ICollection<Partner>? partners = _partnerService.GetAllWithDetails();
 
             foreach (var partner in partners)
             {

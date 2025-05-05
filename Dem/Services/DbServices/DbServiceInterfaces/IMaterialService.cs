@@ -9,14 +9,14 @@ namespace Dem.Services.DbServices.DbServiceInterfaces
 {
     public interface IMaterialService
     {
-        public void AddAsync(Material material);
-        public void UpdateAsync(Material material);
-        public void DeleteAsync(Guid id);
+        public void Add(Material material);
+        public void Update(Material material);
+        public void Delete(Guid id);
 
-        public ICollection<Material> GetAllAsync();
-        public ICollection<Material> GetAllWithDetailsAsync();
+        public List<Material> GetAll();
+        public List<Material> GetAllWithDetails();
 
-        public Material GetAsync(Guid id);
-        public Material GetWithDetailsAsync(Guid id);
+        public Material Get(Guid id);
+        public Material GetWithDetails(Guid id);
     }
 }

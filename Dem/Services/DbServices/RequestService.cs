@@ -11,30 +11,30 @@ namespace Dem.Services.DbServices
     {
         public RequestService(ApplicationDbContext db) : base(db) { }
 
-        public override void AddAsync(Request request)
+        public override void Add(Request request)
         {
             ValidateRequest(request);
-            base.AddAsync(request);
+            base.Add(request);
         }
 
-        public override void UpdateAsync(Request entity)
+        public override void Update(Request entity)
         {
             ValidateRequest(entity);
-            base.UpdateAsync(entity);
+            base.Update(entity);
         }
 
-        public ICollection<Request> GetAllWithDetailsAsync()
+        public List<Request> GetAllWithDetails()
         {
             return _db.Requests.Include(p => p.Partner).Include(p => p.Product).ToList();
         }
 
-        public Request GetAsync(Guid id)
+        public Request Get(Guid id)
         {
-            Request? request = GetByIdAsync(id);
+            Request? request = GetById(id);
 
             return request == null ? throw new RequestNotFoundException(id) : request;
         }
-        public Request GetWithDetailsAsync(Guid id)
+        public Request GetWithDetails(Guid id)
         {
             Request? request = _db.Requests.Include(p => p.Partner).Include(p => p.Product).FirstOrDefault(p => p.Id == id);
 

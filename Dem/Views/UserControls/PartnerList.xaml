@@ -22,7 +22,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Background="GreenYellow">
+                <Border Grid.Row="0" Background="#F4E8D3">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -30,7 +30,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Партнеры" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5"/>
-                        <Button Grid.Column="1" Style="{StaticResource FormButton}" Content="Добавить продукт" HorizontalAlignment="Right" Margin="10 10" Command="{Binding AddPartnerNavCommand}"/>
+                        <Button Grid.Column="1" Style="{StaticResource FormButton}" Content="Добавить партнера" HorizontalAlignment="Right" Margin="10 10" Command="{Binding AddPartnerNavCommand}"/>
                     </Grid>
                 </Border>
 

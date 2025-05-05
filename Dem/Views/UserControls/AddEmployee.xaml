@@ -109,7 +109,7 @@
                 <TextBox
                     Margin="5"
                     Width="130"
-                    Text="{Binding Phone}"
+                    Text="{Binding Password}"
                     HorizontalAlignment="Left"/>
             </StackPanel>
         </Grid>

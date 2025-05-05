@@ -14,6 +14,7 @@ using System.Reflection.Metadata;
 using System.Data.Common;
 using System.Windows.Navigation;
 using Dem.Commands;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Dem
 {
@@ -29,8 +30,7 @@ namespace Dem
             _host = Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
             {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer("Server=DESKTOP-CQ9RL69;Database=DemSkoryh;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True;"));
+                services.AddDbContext<ApplicationDbContext>();                
 
                 services.AddSingleton<NavigationStore>();
                 services.AddTransient<NavigateCommand<RequestListViewModel>>(s =>
@@ -56,10 +56,13 @@ namespace Dem
                 {
                     var navBar = s.GetRequiredService<NavigationBarViewModel>();
                     var productService = s.GetRequiredService<IProductService>();
+                    var materialService = s.GetRequiredService<IMaterialService>();
+
                     var addProductNavigationService = s.GetRequiredService<NavigationService<AddProductViewModel>>();
                     var productEditNavigationService = s.GetRequiredService<NavigationService<ProductEditViewModel>>();
+                    var editMaterialNavigationService = s.GetRequiredService<NavigationService<EditMaterialViewModel>>();
 
-                    return ProductListViewModel.CreateAsync(navBar, productService, addProductNavigationService, productEditNavigationService);
+                    return ProductListViewModel.Create(navBar, productService, materialService, addProductNavigationService, productEditNavigationService, editMaterialNavigationService);
                 });
                 services.AddSingleton<NavigationService<ProductListViewModel>>(s =>
                 {
@@ -69,17 +72,70 @@ namespace Dem
                     {
                         var navBar = s.GetRequiredService<NavigationBarViewModel>();
                         var productService = s.GetRequiredService<IProductService>();
+                        var materialService = s.GetRequiredService<IMaterialService>();
+
                         var addProductNavigationService = s.GetRequiredService<NavigationService<AddProductViewModel>>();
                         var productEditNavigationService = s.GetRequiredService<NavigationService<ProductEditViewModel>>();
+                        var editMaterialNavigationService = s.GetRequiredService<NavigationService<EditMaterialViewModel>>();
 
-                        return ProductListViewModel.CreateAsync(navBar, productService, addProductNavigationService, productEditNavigationService);
+                        return ProductListViewModel.Create(navBar, productService, materialService, addProductNavigationService, productEditNavigationService, editMaterialNavigationService);
                     };
 
                     return new NavigationService<ProductListViewModel>(navigationStore, viewModelFactory);
                 });
 
 
-                // посмотри связь ProductList and ProductEdit  видемо надо убрать доп nav service
+                services.AddTransient<MaterialListViewModel>(s =>
+                {
+                    var navBar = s.GetRequiredService<NavigationBarViewModel>();
+                    var materialService = s.GetRequiredService<IMaterialService>();
+                    var addMaterialNavigationService = s.GetRequiredService<NavigationService<AddMaterialViewModel>>();
+                    var editMaterialNavigationService = s.GetRequiredService<NavigationService<EditMaterialViewModel>>();
+
+                    return MaterialListViewModel.Create(navBar, materialService, addMaterialNavigationService, editMaterialNavigationService);
+                });
+                services.AddSingleton<NavigationService<MaterialListViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    Func<object?, MaterialListViewModel> viewModelFactory = parameter =>
+                    {
+                        var navBar = s.GetRequiredService<NavigationBarViewModel>();
+                        var materialService = s.GetRequiredService<IMaterialService>();
+                        var addMaterialNavigationService = s.GetRequiredService<NavigationService<AddMaterialViewModel>>();
+                        var editMaterialNavigationService = s.GetRequiredService<NavigationService<EditMaterialViewModel>>();
+
+
+                        return MaterialListViewModel.Create(navBar, materialService, addMaterialNavigationService, editMaterialNavigationService);
+                    };
+
+                    return new NavigationService<MaterialListViewModel>(navigationStore, viewModelFactory);
+                });
+
+                services.AddTransient<LoginViewModel>(s =>
+                {
+                    var employeeService = s.GetRequiredService<IEmployeeService>();
+                    var productListNavigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+
+                    return LoginViewModel.Create(employeeService, productListNavigationService);
+                });
+                services.AddSingleton<NavigationService<LoginViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    Func<object?, LoginViewModel> viewModelFactory = parameter =>
+                    {
+                        var employeeService = s.GetRequiredService<IEmployeeService>();
+                        var productListNavigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+
+                        return LoginViewModel.Create(employeeService, productListNavigationService);
+                    };
+
+                    return new NavigationService<LoginViewModel>(navigationStore, viewModelFactory);
+                });
+
+
+                // посмотри связь ProductList and ProductEdit видимо надо убрать доп nav service
 
 
 
@@ -111,13 +167,15 @@ namespace Dem
 
 
 
-                services.AddTransient(s =>
+                services.AddTransient<AddProductViewModel>(s =>
                 {
                     var productService = s.GetRequiredService<IProductService>();
                     var materialService = s.GetRequiredService<IMaterialService>();
-                    var navigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+                    var productListNavigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+                    var editMaterialNavigationService = s.GetRequiredService<NavigationService<EditMaterialViewModel>>();
 
-                    return AddProductViewModel.CreateAsync(productService, materialService, navigationService);
+
+                    return AddProductViewModel.CreateAsync(productService, materialService, productListNavigationService, editMaterialNavigationService);
                 });
                 services.AddSingleton<NavigationService<AddProductViewModel>>( s =>
                 {
@@ -127,9 +185,10 @@ namespace Dem
                     {
                         var productService = s.GetRequiredService<IProductService>();
                         var materialService = s.GetRequiredService<IMaterialService>();
-                        var navigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+                        var productListNavigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+                        var editMaterialNavigationService = s.GetRequiredService<NavigationService<EditMaterialViewModel>>();
 
-                        return AddProductViewModel.CreateAsync(productService, materialService, navigationService);
+                        return AddProductViewModel.CreateAsync(productService, materialService, productListNavigationService, editMaterialNavigationService);
                     };
 
                     var productService = s.GetRequiredService<IProductService>();
@@ -269,58 +328,34 @@ namespace Dem
 
 
 
+                services.AddTransient<AddMaterialViewModel>(s =>
+                {
+                    var materialService = s.GetRequiredService<IMaterialService>();
+                    var supplierService = s.GetRequiredService<ISupplierService>();
+                    var navigationService = s.GetRequiredService<NavigationService<MaterialListViewModel>>();
+
+                    return AddMaterialViewModel.Create(materialService, navigationService, supplierService);
+                });
+                services.AddSingleton<NavigationService<AddMaterialViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    Func<object?, AddMaterialViewModel> viewModelFactory = parameter =>
+                    {
+                        var materialService = s.GetRequiredService<IMaterialService>();
+                        var supplierService = s.GetRequiredService<ISupplierService>();
+                        var navigationService = s.GetRequiredService<NavigationService<MaterialListViewModel>>();
+
+                        return AddMaterialViewModel.Create(materialService, navigationService, supplierService);
+
+                    };
+
+                    return new NavigationService<AddMaterialViewModel>(navigationStore, viewModelFactory);
+                });
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-                //services.AddSingleton<NavigationService<RequestListViewModel>>(s =>
-                //{
-                //    var navigationStore = s.GetRequiredService<NavigationStore>();
-                //    Func<object?, RequestListViewModel> viewModelFactory = parameter => s.GetRequiredService<RequestListViewModel>();
-                //    return new NavigationService<RequestListViewModel>(navigationStore, viewModelFactory);
-                //});
-
-                //services.AddNavigationService<RequestListViewModel>();
-                //services.AddNavigationService<MakeRequestViewModel>();
-                //services.AddTransient<ProductEditViewModel>(s =>
-                //{
-                //    var navBar = s.GetRequiredService<NavigationBarViewModel>();
-                //    var productService = s.GetRequiredService<IProductService>();
-                //    var addProductNavigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
-                //    var productEditNavigationService = s.GetRequiredService<NavigationService<ProductEditViewModel>>();
-
-                //    return ProductEditViewModel.CreateAsync(id, productService, materialService, navigationServic).GetAwaiter().GetResult();
-                //});
-
-
-
-
-                //services.AddAsyncNavigationService<ProductEditViewModel>((s, param) =>
-                //{
-                //    var id = param as Guid?;
-                //    if (id == null)
-                //    {
-                //        throw new ArgumentException("Product ID is required to create ProductEditViewModel");
-                //    }
-
-                //    var productService = s.GetRequiredService<IProductService>();
-                //    var materialService = s.GetRequiredService<IMaterialService>();
-                //    var navigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
-
-                //    return ProductEditViewModel.CreateAsync(id, productService, materialService, navigationService);
-                //});
                 services.AddSingleton<NavigationService<ProductEditViewModel>>(s =>
                 {
                     var navigationStore = s.GetRequiredService<NavigationStore>();
@@ -335,9 +370,31 @@ namespace Dem
 
                         var productService = s.GetRequiredService<IProductService>();
                         var materialService = s.GetRequiredService<IMaterialService>();
-                        var navigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+                        var productListNavigationService = s.GetRequiredService<NavigationService<ProductListViewModel>>();
+                        var editMaterialNavigationService = s.GetRequiredService<NavigationService<EditMaterialViewModel>>();
 
-                        return ProductEditViewModel.CreateAsync(id, productService, materialService, navigationService);
+
+                        return ProductEditViewModel.CreateAsync(id, productService, materialService, productListNavigationService, editMaterialNavigationService);
+                    });
+                });
+
+                services.AddSingleton<NavigationService<EditMaterialViewModel>>(s =>
+                {
+                    var navigationStore = s.GetRequiredService<NavigationStore>();
+
+                    return new NavigationService<EditMaterialViewModel>(navigationStore, parameter =>
+                    {
+                        var id = parameter as Guid?;
+                        if (id == null)
+                        {
+                            throw new ArgumentException("Отсутствует Id материала");
+                        }
+
+                        var materialService = s.GetRequiredService<IMaterialService>();
+                        var supplierService = s.GetRequiredService<ISupplierService>();
+                        var navigationService = s.GetRequiredService<NavigationService<MaterialListViewModel>>();
+
+                        return EditMaterialViewModel.CreateAsync((Guid)id, materialService, supplierService, navigationService);
                     });
                 });
 
@@ -385,7 +442,9 @@ namespace Dem
                     return new NavigationBarViewModel(
                         s.GetRequiredService<NavigationService<ProductListViewModel>>(),
                         s.GetRequiredService<NavigationService<RequestListViewModel>>(),
-                        s.GetRequiredService<NavigationService<PartnerListViewModel>>());
+                        s.GetRequiredService<NavigationService<PartnerListViewModel>>(),
+                        s.GetRequiredService<NavigationService<EmploeeListViewModel>>(),
+                        s.GetRequiredService<NavigationService<MaterialListViewModel>>());
                 });
 
                 services.AddSingleton<MainWindow>();
@@ -400,11 +459,19 @@ namespace Dem
         {
             try
             {
-               _host.StartAsync().GetAwaiter().GetResult();
+                _host.StartAsync().GetAwaiter().GetResult();
+                var scope = _host.Services.CreateScope();
+
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                // Заполнение данными БД
+                // не проверял работу (впадлу), надеюсь на лучшее
+                InitService.Seed(context);
 
                 var mainWindow = _host.Services.GetRequiredService<MainWindow>();
                 var navigationStore = _host.Services.GetRequiredService<NavigationStore>();
-                var initialViewModel = _host.Services.GetRequiredService<ProductListViewModel>();
+                var initialViewModel = _host.Services.GetRequiredService<LoginViewModel>();
+
 
                 navigationStore.CurrentViewModel = initialViewModel;
                 mainWindow.DataContext = _host.Services.GetRequiredService<MainViewModel>();

@@ -18,8 +18,8 @@ namespace Dem.ViewModels
 {
     public class AddProductViewModel : ViewModelBase
     {
-        private readonly IProductService _productService;
         private readonly IMaterialService _materialService;
+        private INavigationService<EditMaterialViewModel> _navigationEditMaterialService;
 
         public string Type { get; set; }
         public string Name { get; set; }
@@ -34,11 +34,12 @@ namespace Dem.ViewModels
         public ICommand SaveProductCommand { get; }
         public ICommand CancelWindowCommand { get; }
 
-        private AddProductViewModel(IProductService productService, IMaterialService materialService, INavigationService<ProductListViewModel> navigationProductListService)
-        {
-            _productService = productService;
-            _materialService = materialService;
 
+        private AddProductViewModel(IProductService productService, IMaterialService materialService,
+            INavigationService<ProductListViewModel> navigationProductListService, INavigationService<EditMaterialViewModel> navigationEditMaterialService)
+        {
+            _materialService = materialService;
+            _navigationEditMaterialService = navigationEditMaterialService;
 
             SaveProductCommand = new SaveProductCommand(productService, this, navigationProductListService);
             CancelWindowCommand = new NavigateCommand<ProductListViewModel>(navigationProductListService);
@@ -46,9 +47,9 @@ namespace Dem.ViewModels
 
         private void InitializeAsync()
         {
-            var materials = _materialService.GetAllAsync();
+            var materials = _materialService.GetAll();
             Materials = new ObservableCollection<MaterialViewModel>(
-                materials.Select(m => new MaterialViewModel(m))
+                materials.Select(m => new MaterialViewModel(m, _materialService, _navigationEditMaterialService))
             );
             foreach (var material in Materials)
             {
@@ -57,9 +58,10 @@ namespace Dem.ViewModels
             MaterialsSelected = new ObservableCollection<Material>();
         }
 
-        public static AddProductViewModel CreateAsync(IProductService productService, IMaterialService materialService, NavigationService<ProductListViewModel> navigationProductListService)
+        public static AddProductViewModel CreateAsync(IProductService productService, IMaterialService materialService,
+            NavigationService<ProductListViewModel> navigationProductListService, INavigationService<EditMaterialViewModel> navigationEditMaterialService)
         {
-            var viewModel = new AddProductViewModel(productService ,materialService, navigationProductListService);
+            var viewModel = new AddProductViewModel(productService ,materialService, navigationProductListService, navigationEditMaterialService);
             viewModel.InitializeAsync();
             return viewModel;
         }

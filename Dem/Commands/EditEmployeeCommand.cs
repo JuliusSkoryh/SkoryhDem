@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Dem.Commands
 {
-    public class EditEmployeeCommand : AsyncCommandBase
+    public class EditEmployeeCommand : CommandBase
     {
         private readonly IEmployeeService _employeeService;
         private readonly EditEmployeeViewModel _editEmployeeViewModel;
@@ -17,9 +17,9 @@ namespace Dem.Commands
             _editEmployeeViewModel = editEmployeeViewModel;
         }
 
-        public async override Task ExecuteAsync(object parameter)
+        public override void Execute(object parameter)
         {
-            var employee = _employeeService.GetAsync(_editEmployeeViewModel.Id);
+            var employee = _employeeService.Get(_editEmployeeViewModel.Id);
 
             if (employee == null)
             {
@@ -37,7 +37,8 @@ namespace Dem.Commands
 
             try
             {
-                _employeeService.UpdateAsync(employee);
+                _employeeService.Update(employee);
+                
                 MessageBox.Show("Работник успешно обновлён", "Success");
 
             }

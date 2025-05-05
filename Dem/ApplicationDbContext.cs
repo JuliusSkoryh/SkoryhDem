@@ -1,5 +1,6 @@
 ﻿using Dem.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +24,7 @@ namespace Dem
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-CQ9RL69;Database=YourDatabaseName;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-CQ9RL69;Database=DemSkoryhJulian;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -64,6 +65,17 @@ namespace Dem
             modelBuilder.Entity<Request>()
                 .Property(r => r.Price)
                 .HasPrecision(18, 2);
+        }
+    }
+
+    public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    {
+        public ApplicationDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionsBuilder.UseSqlServer("Server=DESKTOP-CQ9RL69;Database=DemSkoryhJulian;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True");
+
+            return new ApplicationDbContext(optionsBuilder.Options);
         }
     }
 }

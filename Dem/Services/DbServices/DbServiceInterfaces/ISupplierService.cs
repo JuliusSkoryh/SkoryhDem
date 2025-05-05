@@ -9,14 +9,15 @@ namespace Dem.Services.DbServices.DbServiceInterfaces
 {
     public interface ISupplierService
     {
-        public void AddAsync(Supplier supplier);
-        public void UpdateAsync(Supplier supplier);
-        public void DeleteAsync(Guid id);
+        public void Add(Supplier supplier);
+        public void Update(Supplier supplier);
+        public void Delete(Guid id);
 
-        public ICollection<Supplier>  GetAllAsync();
-        public ICollection<Supplier> GetAllWithDetailsAsync();
+        public List<Supplier>  GetAll();
 
-        public Supplier GetAsync(Guid id);
-        public Supplier GetWithDetailsAsync(Guid id);
+        public Supplier Get(Guid id);
+        public Supplier GetWithDetails(Guid id);
+
+        bool SuppliersExist();
     }
 }

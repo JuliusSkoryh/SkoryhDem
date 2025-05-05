@@ -32,7 +32,7 @@ namespace Dem.Commands
 
             try
             {
-                _employeeService.AddAsync(employee);
+                _employeeService.Add(employee);
                 MessageBox.Show("Работник успешно добавлен в базу данных", "Success");
                 _navigationService.Navigate(null);
             }

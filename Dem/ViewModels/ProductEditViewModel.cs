@@ -20,7 +20,6 @@ namespace Dem.ViewModels
         private Product _product;
         private readonly IProductService _productService;
         private readonly IMaterialService _materialService;
-
         public Guid Id { get; }
         public string Type
         {
@@ -123,17 +122,17 @@ namespace Dem.ViewModels
         }
     
 
-        private void InitializeAsync()
+        private void InitializeAsync(INavigationService<EditMaterialViewModel> navigationEditMaterialService)
         {
             try
             {
-                _product = _productService.GetWithDetailsAsync(Id);
-                var allMaterials = _materialService.GetAllAsync();
+                _product = _productService.GetWithDetails(Id);
+                var allMaterials = _materialService.GetAll();
 
                 Materials = new ObservableCollection<MaterialViewModel?>(
                     allMaterials.Select(m =>
                     {
-                        var viewModel = new MaterialViewModel(m)
+                        var viewModel = new MaterialViewModel(m, _materialService, navigationEditMaterialService)
                         {
                             IsSelected = _product.Materials.Contains(m)
                         };
@@ -151,10 +150,11 @@ namespace Dem.ViewModels
             }            
         }
 
-        public static ProductEditViewModel CreateAsync(Guid? id, IProductService productService, IMaterialService materialService, NavigationService<ProductListViewModel> navigationProductListService)
+        public static ProductEditViewModel CreateAsync(Guid? id, IProductService productService, IMaterialService materialService, 
+            NavigationService<ProductListViewModel> navigationProductListService, INavigationService<EditMaterialViewModel> navigationEditMaterialService)
         {
             var viewModel = new ProductEditViewModel(id, productService, materialService, navigationProductListService);
-            viewModel.InitializeAsync();
+            viewModel.InitializeAsync(navigationEditMaterialService);
             return viewModel;
         }
 

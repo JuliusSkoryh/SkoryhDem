@@ -44,7 +44,7 @@ namespace Dem.ViewModels
         {
             _employees = new ObservableCollection<EmploeeViewModel>();
 
-            var employees = _employeeService.GetAllAsync();
+            var employees = _employeeService.GetAll();
 
             foreach (var employee in employees)
             {

@@ -11,31 +11,32 @@ namespace Dem.Services.DbServices
     {
         public MaterialService(ApplicationDbContext db) : base(db) { }
 
-        public override void AddAsync(Material material)
+        public override void Add(Material material)
         {
             ValidateMaterial(material);
-            base.AddAsync(material);
+            base.Add(material);
         }
 
-        public override void UpdateAsync(Material material)
+        public override void Update(Material material)
         {
             ValidateMaterial(material);
-            base.UpdateAsync(material);
+            base.Update(material);
         }
-        public ICollection<Material> GetAllWithDetailsAsync()
+        public List<Material> GetAllWithDetails()
         {
             return _db.Materials.Include(p => p.Supplier).Include(p => p.Products).ToList();
         }
 
-        public Material GetAsync(Guid id)
+        public Material Get(Guid id)
         {
-            Material? material = GetByIdAsync(id);
+            Material? material = GetById(id);
 
             return material == null ? throw new MaterialNotFoundException(id) : material;
         }
-        public Material GetWithDetailsAsync(Guid id)
+        public Material GetWithDetails(Guid id)
         {
             Material? material = _db.Materials.Include(p => p.Supplier).Include(p => p.Products).FirstOrDefault(p => p.Id == id);
+
             return material == null ? throw new MaterialNotFoundException(id) : material;
         }
 

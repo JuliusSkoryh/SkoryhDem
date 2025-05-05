@@ -22,7 +22,7 @@ namespace Dem.ViewModels
 
         public ICommand AddProductNavigateCommand { get; set; }
 
-        private ProductListViewModel(NavigationBarViewModel navigationBarViewModel, IProductService productService, NavigationService<AddProductViewModel> navigationService)
+        private ProductListViewModel(NavigationBarViewModel navigationBarViewModel, IProductService productService, INavigationService<AddProductViewModel> navigationService)
         {
             NavigationBarViewModel = navigationBarViewModel;
             _productService = productService;
@@ -32,23 +32,26 @@ namespace Dem.ViewModels
             _productViewModels = new ObservableCollection<ProductViewModel>();
         }
 
-        public static ProductListViewModel CreateAsync(NavigationBarViewModel navigationBarViewModel, IProductService productService,
-            NavigationService<AddProductViewModel> addProductNavigationService, NavigationService<ProductEditViewModel> productEditNavigationService)
+        public static ProductListViewModel Create(NavigationBarViewModel navigationBarViewModel, IProductService productService, IMaterialService materialService,
+            INavigationService<AddProductViewModel> addProductNavigationService, INavigationService<ProductEditViewModel> productEditNavigationService,
+            INavigationService<EditMaterialViewModel> editMaterialNavigationService)
         {
             var viewModel = new ProductListViewModel(navigationBarViewModel, productService, addProductNavigationService);
-            viewModel.InitializeAsync(productEditNavigationService);
+            viewModel.Initialize(productEditNavigationService, materialService, editMaterialNavigationService);
             return viewModel;
         }
-        private void InitializeAsync(NavigationService<ProductEditViewModel> productEditNavigationService)
+        private void Initialize(INavigationService<ProductEditViewModel> productEditNavigationService, IMaterialService materialService,
+            INavigationService<EditMaterialViewModel> editMaterialNavigationService)
         {
-            LoadProductsAsync(productEditNavigationService);
+            LoadProducts(productEditNavigationService, materialService, editMaterialNavigationService);
         }
-        private void LoadProductsAsync(NavigationService<ProductEditViewModel> productEditNavigationService)
+        private void LoadProducts(INavigationService<ProductEditViewModel> productEditNavigationService, IMaterialService materialService,
+            INavigationService<EditMaterialViewModel> editMaterialNavigationService)
         {
-            ICollection<Product>? products = _productService.GetAllWithDetailsAsync();
+            ICollection<Product>? products = _productService.GetAllWithDetails();
             foreach (var product in products)
             {
-                _productViewModels.Add(new ProductViewModel(product, productEditNavigationService, _productService));
+                _productViewModels.Add(new ProductViewModel(product, productEditNavigationService, _productService, materialService, editMaterialNavigationService));
             }
         }
     }

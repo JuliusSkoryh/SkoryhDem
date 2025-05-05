@@ -42,7 +42,7 @@ namespace Dem.ViewModels
         {
             _requests = new ObservableCollection<RequestViewModel>();
 
-            var requests = _requestService.GetAllWithDetailsAsync();
+            var requests = _requestService.GetAllWithDetails();
             foreach (var request in requests)
             {
                 _requests.Add(new RequestViewModel(request, requestService, requestListnavigationService));

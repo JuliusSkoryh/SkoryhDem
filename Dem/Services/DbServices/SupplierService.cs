@@ -16,33 +16,39 @@ namespace Dem.Services.DbServices
     {
         public SupplierService(ApplicationDbContext db) : base(db) { }
 
-        public override void AddAsync(Supplier supplier)
+        public override void Add(Supplier supplier)
         {
             ValidateSupplier(supplier);
-            base.AddAsync(supplier);
+            base.Add(supplier);
         }
 
-        public override void UpdateAsync(Supplier supplier)
+        public override void Update(Supplier supplier)
         {
             ValidateSupplier(supplier);
-            base.UpdateAsync(supplier);
+            base.Update(supplier);
         }
-        public ICollection<Supplier> GetAllWithDetailsAsync()
+        public List<Supplier> GetAllWithDetails()
         {
             return _db.Suppliers.Include(p => p.Materials).ToList();
         }
 
-        public Supplier GetAsync(Guid id)
+        public Supplier Get(Guid id)
         {
-            Supplier? supplier = GetByIdAsync(id);
+            Supplier? supplier = GetById(id);
 
             return supplier == null ? throw new SupplierNotFoundException(id) : supplier;
         }
-        public Supplier GetWithDetailsAsync(Guid id)
+        public Supplier GetWithDetails(Guid id)
         {
             Supplier? supplier = _db.Suppliers.Include(p => p.Materials).FirstOrDefault(p => p.Id == id);
 
             return supplier == null ? throw new SupplierNotFoundException(id) : supplier;
+        }
+
+        public List<Supplier> GetAll()
+        {
+            var suppliers = base.GetAll();
+            return suppliers;
         }
 
         private void ValidateSupplier(Supplier supplier)
@@ -58,6 +64,11 @@ namespace Dem.Services.DbServices
             {
                 throw new InvalidPartnerException();
             }
+        }
+
+        public bool SuppliersExist()
+        {
+            return _db.Suppliers.Any();
         }
     }
 }

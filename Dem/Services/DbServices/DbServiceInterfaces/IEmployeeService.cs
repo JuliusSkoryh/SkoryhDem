@@ -9,13 +9,13 @@ namespace Dem.Services.DbServices.DbServiceInterfaces
 {
     public interface IEmployeeService
     {
-        public void AddAsync(Employee employee);
-        public void UpdateAsync(Employee employee);
-        public void DeleteAsync(Guid id);
+        public void Add(Employee employee);
+        public void Update(Employee employee);
+        public void Delete(Guid id);
 
-        public ICollection<Employee> GetAllAsync();
-        public ICollection<Employee> GetAllWithDetailsAsync();
+        public List<Employee> GetAll();
 
-        public Employee GetAsync(Guid id);
+        public Employee Get(Guid id);
+        public Employee GetByEmail(string email);
     }
 }

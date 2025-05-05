@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106070707_init3")]
-    partial class init3
+    [Migration("20250424234031_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace Dem.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .IsRequired()

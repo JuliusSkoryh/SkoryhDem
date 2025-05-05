@@ -33,7 +33,7 @@ namespace Dem.Commands
 
             try
             {
-                _productService.AddAsync(product);
+                _productService.Add(product);
                 MessageBox.Show("Продукт успешно добавлен в базу данных", "Success");
                 _navigationService.Navigate(null);
             }

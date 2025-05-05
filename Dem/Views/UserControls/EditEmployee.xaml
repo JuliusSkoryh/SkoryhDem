@@ -43,7 +43,7 @@
         Text="ФИО"/>
                 <TextBox
                     Margin="5"
-                    Width="130"
+                    Width="300"
                     Text="{Binding FullName}"/>
             </StackPanel>
 
@@ -55,7 +55,7 @@
                     HorizontalAlignment="Left"
                     Margin="5"
                     Width="130"
-                    Text="{Binding DateOfBirth}"/>
+                    Text="{Binding DateOfBirthBoofer, Mode=TwoWay}"/>
             </StackPanel>
         </Grid>
 
@@ -162,8 +162,8 @@
         </Grid>
 
         <StackPanel Grid.Row="5" Margin="10 0" Orientation="Horizontal">
-            <Button Style="{StaticResource FormButton}" Width="170" Content="Создать работника" Command="{Binding EditEmployeeCommand}"/>
-            <Button Style="{StaticResource FormButton}" Width="170" Content="Создать работника" Command="{Binding DeleteCommand}"/>
+            <Button Style="{StaticResource FormButton}" Width="170" Content="Сохранить изменения" Command="{Binding EditEmployeeCommand}"/>
+            <Button Style="{StaticResource FormButton}" Width="170" Content="Удалить работника из базы данных" Command="{Binding DeleteCommand}"/>
             <Button Style="{StaticResource FormButton}" Width="100" Content="Закрыть" Command="{Binding CancelWindowCommand}"/>
         </StackPanel>
     </Grid>

@@ -37,7 +37,7 @@ namespace Dem.Commands
 
             try
             {
-                _employeeService.DeleteAsync(_editEmployeeViewModel.Id);
+                _employeeService.Delete(_editEmployeeViewModel.Id);
                 MessageBox.Show("Работник успешно удален", "Success");
                 _navigationService.Navigate(null);
             }

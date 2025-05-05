@@ -19,29 +19,29 @@ namespace Dem.Services.DbServices
     {
         public PartnerService(ApplicationDbContext db) : base(db) { }
 
-        public override void AddAsync(Partner partner)
+        public override void Add(Partner partner)
         {
             ValidatePartner(partner);
-            base.AddAsync(partner);
+            base.Add(partner);
         }
 
-        public override void UpdateAsync(Partner partner)
+        public override void Update(Partner partner)
         {
             ValidatePartner(partner);
-            base.UpdateAsync(partner);
+            base.Update(partner);
         }
-        public ICollection<Partner> GetAllWithDetailsAsync()
+        public List<Partner> GetAllWithDetails()
         {
             return _db.Partners.Include(p => p.Requests).ToList();
         }
 
-        public Partner GetAsync(Guid id)
+        public Partner Get(Guid id)
         {
-            Partner? partner = GetByIdAsync(id);
+            Partner? partner = GetById(id);
 
             return partner == null ? throw new PartnerNotFoundException(id) : partner;
         }
-        public Partner GetWithDetailsAsync(Guid id)
+        public Partner GetWithDetails(Guid id)
         {
             Partner? partner = _db.Partners.Include(p => p.Requests).FirstOrDefault(p => p.Id == id);
 
@@ -51,7 +51,21 @@ namespace Dem.Services.DbServices
         private void ValidatePartner(Partner partner)
         {
             string phonePattern = @"^\+?[1-9]\d{1,14}$";
+            
             Regex phoneRegex = new Regex(phonePattern);
+
+            bool p1 = String.IsNullOrEmpty(partner.Type);
+            bool p2 = String.IsNullOrEmpty(partner.Name);
+            bool p3 = String.IsNullOrEmpty(partner.Director);
+            bool p4 = String.IsNullOrEmpty(partner.Email);
+            bool p5 = String.IsNullOrEmpty(partner.Phone);
+            bool p6 = String.IsNullOrEmpty(partner.LegalAddress);
+            bool p7 = String.IsNullOrEmpty(partner.TIN);
+            bool p8 = !MailAddress.TryCreate(partner.Email, out MailAddress? afsdsaaddress);
+            bool p9 = phoneRegex.IsMatch(partner.Phone);
+
+
+
 
             if (partner == null)
             {
@@ -66,7 +80,7 @@ namespace Dem.Services.DbServices
                 || String.IsNullOrEmpty(partner.LegalAddress)
                 || String.IsNullOrEmpty(partner.TIN)
                 || !MailAddress.TryCreate(partner.Email, out MailAddress? address)
-                || phoneRegex.IsMatch(partner.Phone))
+                || !phoneRegex.IsMatch(partner.Phone))
             {
                 throw new InvalidPartnerException();
             }

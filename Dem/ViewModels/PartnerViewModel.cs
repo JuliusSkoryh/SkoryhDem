@@ -88,7 +88,7 @@ namespace Dem.ViewModels
                 OnPropertyChanged(nameof(TIN));
             }
         }
-        public Rating Rating
+        public int Rating
         {
             get => _partner.Rating;
             set
@@ -124,7 +124,7 @@ namespace Dem.ViewModels
         {
             try
             {
-                _partner = _partnerService.GetWithDetailsAsync(partnerId);
+                _partner = _partnerService.GetWithDetails(partnerId);
 
                 if (_partner.Requests is null)
                 {

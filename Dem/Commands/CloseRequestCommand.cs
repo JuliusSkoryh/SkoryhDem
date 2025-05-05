@@ -26,14 +26,14 @@ namespace Dem.Commands
 
             try
             {
-                var request = _requestService.GetAsync(_requestViewModel.Id);
+                var request = _requestService.Get(_requestViewModel.Id);
 
                 if (request != null)
                 {
                     if(request.DateOfClosing == null)
                     {
                         request.DateOfClosing = dateOfClose;
-                        _requestService.UpdateAsync(request);
+                        _requestService.Update(request);
 
                         _requestViewModel.DateOfClosing = dateOfClose;
                     }

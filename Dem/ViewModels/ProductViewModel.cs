@@ -117,11 +117,12 @@ namespace Dem.ViewModels
         public ICommand EditProductCommand { get; }
         public ICommand AddQuantityOfProductInStorageCommand { get; }
 
-        public ProductViewModel(Product product, NavigationService<ProductEditViewModel> productEditNavigationService, IProductService productService)
+        public ProductViewModel(Product product, INavigationService<ProductEditViewModel> productEditNavigationService,
+            IProductService productService, IMaterialService materialService, INavigationService<EditMaterialViewModel> editMaterialNavigationService)
         {
             _product = product;
 
-            Initialize();
+            Initialize(materialService, editMaterialNavigationService);
 
             // DI id навигация с параметром, асинхронная фабрика создания 
 
@@ -129,10 +130,10 @@ namespace Dem.ViewModels
             AddQuantityOfProductInStorageCommand = new AddQuantityOfProductInStorageCommand(productService, _product.Id);
         }
 
-        private void Initialize()
+        private void Initialize(IMaterialService materialService, INavigationService<EditMaterialViewModel> editMaterialNavigationService)
         {
 
-            _materials = new ObservableCollection<MaterialViewModel>(_product.Materials.Select(m => new MaterialViewModel(m)));
+            _materials = new ObservableCollection<MaterialViewModel>(_product.Materials.Select(m => new MaterialViewModel(m, materialService, editMaterialNavigationService)));
 
             if(_requests == null || !_requests.Any())
             {

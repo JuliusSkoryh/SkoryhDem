@@ -9,14 +9,14 @@ namespace Dem.Services.DbServices.DbServiceInterfaces
 {
     public interface IRequestService
     {
-        public void AddAsync(Request request);
-        public void UpdateAsync(Request request);
-        public void DeleteAsync(Guid id);
+        public void Add(Request request);
+        public void Update(Request request);
+        public void Delete(Guid id);
 
-        public ICollection<Request> GetAllAsync();
-        public  ICollection<Request> GetAllWithDetailsAsync();
+        public List<Request> GetAll();
+        public List<Request> GetAllWithDetails();
 
-        public Request GetAsync(Guid id);
-        public Request GetWithDetailsAsync(Guid id);
+        public Request Get(Guid id);
+        public Request GetWithDetails(Guid id);
     }
 }

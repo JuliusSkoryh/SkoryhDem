@@ -25,7 +25,7 @@ namespace Dem.Commands
 
         public async override Task ExecuteAsync(object parameter)
         {
-            var partner = _partnerService.GetAsync(_editPartnerViewModel.Id);
+            var partner = _partnerService.Get(_editPartnerViewModel.Id);
 
             if (partner == null)
             {
@@ -41,7 +41,7 @@ namespace Dem.Commands
 
             try
             {
-                _partnerService.UpdateAsync(partner);
+                _partnerService.Update(partner);
                 MessageBox.Show("Партнер успешно обновлён", "Success");
             }
             catch (Exception ex)

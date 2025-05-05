@@ -37,7 +37,7 @@ namespace Dem.Commands
 
             try
             {
-                _productService.DeleteAsync(_productEditViewModel.Id);
+                _productService.Delete(_productEditViewModel.Id);
                 MessageBox.Show("Продукт успешно удален", "Success");
                 _navigationService.Navigate(null);
             }

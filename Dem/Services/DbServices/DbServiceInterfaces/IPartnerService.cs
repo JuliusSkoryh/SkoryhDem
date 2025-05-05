@@ -9,14 +9,14 @@ namespace Dem.Services.DbServices.DbServiceInterfaces
 {
     public interface IPartnerService
     {
-        public void AddAsync(Partner partner);
-        public void UpdateAsync(Partner partner);
-        public void DeleteAsync(Guid id);
+        public void Add(Partner partner);
+        public void Update(Partner partner);
+        public void Delete(Guid id);
 
-        public ICollection<Partner> GetAllAsync();
-        public ICollection<Partner> GetAllWithDetailsAsync();
+        public List<Partner> GetAll();
+        public List<Partner> GetAllWithDetails();
 
-        public Partner GetAsync(Guid id);
-        public Partner GetWithDetailsAsync(Guid id);
+        public Partner Get(Guid id);
+        public Partner GetWithDetails(Guid id);
     }
 }

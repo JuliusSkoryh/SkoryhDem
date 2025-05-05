@@ -84,17 +84,17 @@ namespace Dem.ViewModels
                 OnPropertyChanged(nameof(TIN));
             }
         }
-        public Rating SelectedRating
+        public int SelectedRating
         {
             get => _partner.Rating;
             set
             {
                 _partner.Rating = value;
-                OnPropertyChanged(nameof(Rating));
+                OnPropertyChanged(nameof(SelectedRating));
             }
         }
 
-        public ObservableCollection<Rating> Ratings { get; set; }
+        public ObservableCollection<int> Ratings { get; set; }
 
         public ICommand EditPartnerCommand { get; }
         public ICommand CancelWindowCommand { get; }
@@ -119,9 +119,9 @@ namespace Dem.ViewModels
         {
             try
             {
-                _partner = _partnerService.GetAsync(id);
+                _partner = _partnerService.Get(id);
                 SelectedRating = _partner.Rating;
-                Ratings = new ObservableCollection<Rating>((Rating[])Enum.GetValues(typeof(Rating)));
+                Ratings = new ObservableCollection<int>(Enumerable.Range(1, 10));
 
             }
             catch (Exception ex)

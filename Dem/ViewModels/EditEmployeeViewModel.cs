@@ -40,9 +40,29 @@ namespace Dem.ViewModels
                 OnPropertyChanged(nameof(DateOfBirth));
             }
         }
+
+        // date picker не поддерживает dateOnly, пришлось сделать промежуточное свойство
+        private DateTime? _dateOfBirthBoofer;
+        public DateTime? DateOfBirthBoofer
+        {
+            get => _dateOfBirthBoofer ?? new DateTime(_employee.DateOfBirth.Year, _employee.DateOfBirth.Month, _employee.DateOfBirth.Day);
+            set
+            {
+                _dateOfBirthBoofer = value;
+                if (value != null)
+                {
+                    _employee.DateOfBirth = DateOnly.FromDateTime(value.Value);
+                    OnPropertyChanged(nameof(DateOfBirthBoofer));
+                    OnPropertyChanged(nameof(DateOfBirth));
+                }
+            }
+        }
+
+
+
         public bool HaveFamily
         {
-            get => HaveFamily;
+            get => _employee.HaveFamily;
             set
             {
                 _employee.HaveFamily = value;
@@ -122,12 +142,12 @@ namespace Dem.ViewModels
         {
             try
             {
-                _employee = _employeeService.GetAsync(id);
+                _employee = _employeeService.Get(id);
 
-                SelectedHealhStatus = HealhStatus.good;
+                _dateOfBirthBoofer = new DateTime(_employee.DateOfBirth.Year, _employee.DateOfBirth.Month, _employee.DateOfBirth.Day);
+
                 HealhStatuses = new ObservableCollection<HealhStatus>((HealhStatus[])Enum.GetValues(typeof(HealhStatus)));
 
-                SelectedEmployeeStatus = EmployeeStatus.common;
                 EmployeeStatuses = new ObservableCollection<EmployeeStatus>((EmployeeStatus[])Enum.GetValues(typeof(EmployeeStatus)));
 
             }

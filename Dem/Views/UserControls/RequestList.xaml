@@ -16,13 +16,13 @@
 
         <nav:Navigation DataContext="{Binding NavigationBarViewModel}"/>
 
-        <Grid Grid.Row="1" Background="#0D58A6">
+            <Grid Grid.Row="1" Background="#F4E8D3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Background="#8B6ED7">
+                <Border Grid.Row="0" Background="#F4E8D3">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -30,7 +30,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Заказы" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 10"/>
-                        <Button Grid.Column="1" Style="{StaticResource FormButton}" Background="#FF9900" Content="Создать заказ" HorizontalAlignment="Right" Margin="10 5" Command="{Binding MakeRequestNavigateCommand}"/>
+                        <Button Grid.Column="1" Style="{StaticResource FormButton}" Background="#67BA80" Content="Создать заказ" HorizontalAlignment="Right" Margin="10 10" Command="{Binding MakeRequestNavigateCommand}"/>
                 </Grid>
             </Border>
 

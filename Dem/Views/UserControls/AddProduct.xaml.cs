@@ -24,28 +24,8 @@ namespace Dem.Views.UserControls
     {
         public AddProduct()
         {
-            //DataContextChanged += AddProduct_DataContextChanged;
             InitializeComponent();
         }
 
-        //private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (sender is ListBox listBox && listBox.SelectedItem is Material selectedMaterial)
-        //    {
-        //        var viewModel = (AddProductViewModel)DataContext;
-        //        viewModel.AddSelectedMaterial(selectedMaterial);
-        //    }
-        //}
-
-        //private void AddProduct_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-        //    if (DataContext is AddProductViewModel viewModel)
-        //    {
-        //        foreach (var material in viewModel.MaterialsSelected)
-        //        {
-        //            MaterialsListBox.SelectedItems.Add(material);
-        //        }
-        //    }
-        //}
     }
 }

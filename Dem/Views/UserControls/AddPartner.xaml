@@ -80,7 +80,7 @@
                     Text="Адресс"/>
             <TextBox
                     Margin="5"
-                    Width="240"
+                    Width="400"
                     Text="{Binding LegalAddress}"/>
         </StackPanel>
     </Grid>

@@ -37,7 +37,7 @@ namespace Dem.Commands
 
             try
             {
-                _partnerService.DeleteAsync(_editPartnerViewModel.Id);
+                _partnerService.Delete(_editPartnerViewModel.Id);
                 MessageBox.Show("Партнер успешно удален", "Success");
                 _navigationService.Navigate(null);
             }

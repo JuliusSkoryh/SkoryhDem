@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:nav="clr-namespace:Dem.Views.UserControls" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ProductListViewModel}"
+             xmlns:local="clr-namespace:Dem.Views.UserControls"
+             xmlns:viewmodels="clr-namespace:Dem.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ProductListViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Padding="10">        
@@ -22,14 +24,14 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Background="GreenYellow">
+                <Border Grid.Row="0" Background="#F4E8D3">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Продукты" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5"/>
+                    <TextBlock Grid.Column="0" Text="Продукты" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 10"/>
                     <Button Grid.Column="1" Style="{StaticResource FormButton}" Content="Добавить продукт" HorizontalAlignment="Right" Margin="10 10" Command="{Binding AddProductNavigateCommand}"/>
                 </Grid>
             </Border>

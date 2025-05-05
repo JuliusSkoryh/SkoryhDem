@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dem" xmlns:usercontrols="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized">
+        Title="MasterFloor" WindowState="Maximized">
     <Grid>
         <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                <usercontrols:LoginWindow/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:ProductListViewModel}">
                 <usercontrols:ProductList/>
             </DataTemplate>
@@ -31,6 +34,24 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:EditPartnerViewModel}">
                 <usercontrols:EditPartner/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddEmployeeViewModel}">
+                <usercontrols:AddEmployee/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditEmployeeViewModel}">
+                <usercontrols:EditEmployee/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EmploeeListViewModel}">
+                <usercontrols:EmployeeList/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MaterialListViewModel}">
+                <usercontrols:MaterialList/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddMaterialViewModel}">
+                <usercontrols:AddMaterial/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditMaterialViewModel}">
+                <usercontrols:EditMaterial/>
             </DataTemplate>
         </Grid.Resources>
 
