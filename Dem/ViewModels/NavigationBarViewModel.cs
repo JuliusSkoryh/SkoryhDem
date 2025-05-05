@@ -6,7 +6,7 @@ using System.Windows.Input;
 namespace Dem.ViewModels
 {
     public class NavigationBarViewModel : ViewModelBase
-    { 
+    {  
         public ICommand NavigateProductListCommand { get; }
         public ICommand NavigateRequestListCommand { get; }
         public ICommand NavigatePartnerListCommand { get; }

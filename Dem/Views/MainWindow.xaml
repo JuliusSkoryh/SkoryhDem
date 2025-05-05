@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Dem" xmlns:usercontrols="clr-namespace:Dem.Views.UserControls" xmlns:viewmodels="clr-namespace:Dem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="MasterFloor" WindowState="Maximized">
-    <Grid>
+    <Grid> 
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
                 <usercontrols:LoginWindow/>

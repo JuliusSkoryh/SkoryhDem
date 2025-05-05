@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Dem.Primitives
 {
     public abstract class GenericRepository<TEntity> where TEntity : Entity
-    {
+    { 
         protected readonly ApplicationDbContext _db;
 
         protected GenericRepository(ApplicationDbContext db)

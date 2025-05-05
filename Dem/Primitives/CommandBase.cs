@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 
 namespace Dem.Primitives
-{
+{ 
     public abstract class CommandBase : ICommand
     {
         public event EventHandler? CanExecuteChanged;

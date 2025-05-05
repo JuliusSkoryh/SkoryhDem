@@ -9,7 +9,7 @@
 
     <UserControl.Resources>
         
-    </UserControl.Resources>
+    </UserControl.Resources> 
     
     <Grid>
         <Grid.ColumnDefinitions>

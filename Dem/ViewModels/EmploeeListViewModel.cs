@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Dem.Commands;
 
 namespace Dem.ViewModels
-{
+{ 
     public class EmploeeListViewModel : ViewModelBase
     {
         private readonly IEmployeeService _employeeService;

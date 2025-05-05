@@ -22,7 +22,7 @@ namespace Dem.Views.UserControls
     {
         public PartnerList()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
     }
 }

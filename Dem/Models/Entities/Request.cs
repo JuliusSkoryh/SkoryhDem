@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Dem.Models.Entities
 {
     public class Request : Entity
-    {
+    { 
         public int QuantityOfProduct { get; set; }
         public decimal Price { get; set; }
         public DateOnly DateOfCreation { get; set; }

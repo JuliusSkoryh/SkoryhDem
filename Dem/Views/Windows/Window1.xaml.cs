@@ -21,7 +21,7 @@ namespace Dem.Views.Windows
     {
         public int? Quantity { get; private set; }
 
-        public Window1()
+        public Window1() 
         {
             InitializeComponent();
         }

@@ -19,7 +19,7 @@ namespace Dem.Views.UserControls
     /// Логика взаимодействия для EditPartner.xaml
     /// </summary>
     public partial class EditPartner : UserControl
-    {
+    { 
         public EditPartner()
         {
             InitializeComponent();

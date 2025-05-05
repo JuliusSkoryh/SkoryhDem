@@ -12,7 +12,7 @@ using System.Windows.Input;
 using Dem.Models.Entities;
 
 namespace Dem.ViewModels
-{
+{ 
     public class MakeRequestViewModel : ViewModelBase
     {
         private readonly IRequestService _requestService;

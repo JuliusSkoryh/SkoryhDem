@@ -9,7 +9,7 @@ using System.Windows.Input;
 namespace Dem.ViewModels
 {
     public class AddPartnerViewModel : ViewModelBase
-    {
+    { 
         private readonly IPartnerService _partnerService;
 
         public string Type { get; set; }

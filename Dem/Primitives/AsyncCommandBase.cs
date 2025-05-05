@@ -1,5 +1,5 @@
 ﻿namespace Dem.Primitives
-{
+{ 
     public abstract class AsyncCommandBase : CommandBase
     {
         private bool _isExecuting;

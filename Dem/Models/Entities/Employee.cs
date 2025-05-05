@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Dem.Models.Entities
 {
     public class Employee : Entity
-    {
+    { 
         public string FullName { get; set; } 
         public DateOnly DateOfBirth { get; set; }
         public bool HaveFamily { get; set; }

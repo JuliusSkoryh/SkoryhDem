@@ -1,7 +1,7 @@
 ﻿namespace Dem.Primitives
 {
     public abstract class Entity : IEquatable<Entity>
-    {
+    { 
         protected Entity() { }
         public Guid Id { get; init; }
 

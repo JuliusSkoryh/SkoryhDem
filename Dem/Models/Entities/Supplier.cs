@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dem.Models.Entities
-{
+{ 
     public class Supplier : Entity
     {
         public string Name { get; set; }

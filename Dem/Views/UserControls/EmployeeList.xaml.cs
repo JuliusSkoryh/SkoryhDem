@@ -19,7 +19,7 @@ namespace Dem.Views.UserControls
     /// Логика взаимодействия для EmployeeList.xaml
     /// </summary>
     public partial class EmployeeList : UserControl
-    {
+    { 
         public EmployeeList()
         {
             InitializeComponent();

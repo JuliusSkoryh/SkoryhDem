@@ -15,7 +15,7 @@ using System.Windows;
 using System.Windows.Input;
 
 namespace Dem.ViewModels
-{
+{ 
     public class EditEmployeeViewModel : ViewModelBase
     {
         private readonly IEmployeeService _employeeService;

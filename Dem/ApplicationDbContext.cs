@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Dem
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext 
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Material> Materials { get; set; }

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Dem.Views.UserControls
 {
-    /// <summary>
-    /// Логика взаимодействия для RequestList.xaml
-    /// </summary>
     public partial class RequestList : UserControl
     {
         public RequestList()

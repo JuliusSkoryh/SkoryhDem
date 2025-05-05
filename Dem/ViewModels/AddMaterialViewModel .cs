@@ -15,7 +15,7 @@ using Dem.Services.DbServices;
 using System.Collections.ObjectModel;
 
 namespace Dem.ViewModels
-{
+{ 
     public class AddMaterialViewModel : ViewModelBase
     {
         private readonly IMaterialService _materialService;

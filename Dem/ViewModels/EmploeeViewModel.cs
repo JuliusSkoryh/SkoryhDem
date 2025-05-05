@@ -12,7 +12,7 @@ using System.Windows.Input;
 using Dem.Commands;
 
 namespace Dem.ViewModels
-{
+{ 
     public class EmploeeViewModel : ViewModelBase
     {
         private Employee _employee;

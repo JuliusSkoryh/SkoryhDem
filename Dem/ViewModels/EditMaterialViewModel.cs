@@ -15,7 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace Dem.ViewModels
-{
+{ 
     public class EditMaterialViewModel : ViewModelBase
     {
         private readonly IMaterialService _materialService;

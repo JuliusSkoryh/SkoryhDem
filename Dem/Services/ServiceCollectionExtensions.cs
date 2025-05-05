@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Dem.Services
 {
     public static class ServiceCollectionExtensions
-    {
+    { 
         public static IServiceCollection AddNavigationService<TViewModel>(this IServiceCollection services, Func<IServiceProvider, object?, TViewModel> viewModelFactory)
             where TViewModel : ViewModelBase
         {

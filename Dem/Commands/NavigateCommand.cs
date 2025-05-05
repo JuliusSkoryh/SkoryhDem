@@ -10,7 +10,7 @@ namespace Dem.Commands
         private object? _parameter;
 
         public NavigateCommand(INavigationService<TViewModel> navigationService, object? parameter = null)
-        {
+        { 
             _navigationService = navigationService;
             _parameter = parameter;
         }

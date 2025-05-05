@@ -20,7 +20,7 @@ namespace Dem.Views.UserControls
     /// </summary>
     public partial class Navigation : UserControl
     {
-        public Navigation()
+        public Navigation() 
         {
             InitializeComponent();
         }

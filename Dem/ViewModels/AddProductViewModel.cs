@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Dem.ViewModels
-{
+{ 
     public class AddProductViewModel : ViewModelBase
     {
         private readonly IMaterialService _materialService;

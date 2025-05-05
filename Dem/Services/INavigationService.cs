@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Dem.Services
 {
     public interface INavigationService<TViewModel>
-    {
+    { 
         void Navigate(object? parameter = null);
     }
 }

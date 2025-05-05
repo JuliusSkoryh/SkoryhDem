@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Dem.Services
 {
     public class ParameterNavigationService<TViewModel, TParameter> where TViewModel : ViewModelBase
-    {
+    { 
         private readonly NavigationStore _navigationStore;
         private readonly Func<TParameter, TViewModel> _createViewModel;
 

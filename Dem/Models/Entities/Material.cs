@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Dem.Models.Entities
 {
     public class Material : Entity
-    {
+    { 
         public string Name { get; set; }
         public string Type { get; set; }
         public int QuantityInPackaging { get; set; }

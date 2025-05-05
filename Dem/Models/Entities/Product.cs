@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Dem.Models.Entities
 {
     public class Product : Entity
-    {
+    { 
         public string Type { get; set; }
         public string Name { get; set; }
         public string Article { get; set; }

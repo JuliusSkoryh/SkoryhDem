@@ -15,11 +15,8 @@ using System.Windows.Shapes;
 
 namespace Dem.Views.UserControls
 {
-    /// <summary>
-    /// Логика взаимодействия для ProductList.xaml
-    /// </summary>
     public partial class ProductList : UserControl
-    {
+    { 
         public ProductList()
         {
             InitializeComponent();

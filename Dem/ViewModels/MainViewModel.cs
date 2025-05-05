@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dem.ViewModels
-{
+{ 
     public class MainViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;

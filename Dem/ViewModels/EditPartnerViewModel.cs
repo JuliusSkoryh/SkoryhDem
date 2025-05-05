@@ -16,7 +16,7 @@ using System.Windows.Input;
 namespace Dem.ViewModels
 {
     public class EditPartnerViewModel : ViewModelBase
-    {
+    { 
         private readonly IPartnerService _partnerService;
         private Partner _partner;
 

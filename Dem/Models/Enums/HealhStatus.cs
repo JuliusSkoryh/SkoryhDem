@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dem.Models.Enums
-{
+{ 
     public enum HealhStatus
     {
         good,

@@ -19,7 +19,7 @@ namespace Dem.Views.UserControls
     /// Логика взаимодействия для EditMaterial.xaml
     /// </summary>
     public partial class EditMaterial : UserControl
-    {
+    { 
         public EditMaterial()
         {
             InitializeComponent();

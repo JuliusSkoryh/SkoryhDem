@@ -19,7 +19,7 @@ namespace Dem.Views.UserControls
     /// Логика взаимодействия для EditEmployee.xaml
     /// </summary>
     public partial class EditEmployee : UserControl
-    {
+    { 
         public EditEmployee()
         {
             InitializeComponent();

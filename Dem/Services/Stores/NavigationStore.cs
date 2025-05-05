@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Dem.Services.Stores
 {
     public class NavigationStore
-    {
+    { 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {

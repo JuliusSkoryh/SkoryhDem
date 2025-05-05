@@ -19,7 +19,7 @@ namespace Dem.Views.UserControls
     /// Логика взаимодействия для MakeRequest.xaml
     /// </summary>
     public partial class MakeRequest : UserControl
-    {
+    { 
         public MakeRequest()
         {
             InitializeComponent();

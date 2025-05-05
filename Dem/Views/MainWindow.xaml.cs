@@ -10,6 +10,6 @@ namespace Dem
         public MainWindow()
         {
             InitializeComponent();
-        }
+        } 
     }
 }

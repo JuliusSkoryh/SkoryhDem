@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dem.Services.Stores
-{
+{ 
     public class AccountStore
     {
         public event Action CurrentEmployeeChanged;
