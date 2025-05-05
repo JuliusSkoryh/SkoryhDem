@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 namespace Dem.ViewModels
 {
     public class ProductViewModel : ViewModelBase
-    {
+    { 
         // если есть баги - чекай в Init
 
         private readonly Product _product;

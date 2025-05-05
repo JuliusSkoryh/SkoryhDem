@@ -8,7 +8,7 @@ namespace Dem.Exceptions.InvalidExceptions
 {
     public class InvalidMaterialException : Exception
     {
-        public InvalidMaterialException() : base("Неверные параметры у материала.") { }
+        public InvalidMaterialException() : base("Неверные параметры у материала.") { } 
         public InvalidMaterialException(string message) : base($"Неверные параметры у материала: {message}") { }
     }
 }

@@ -9,7 +9,7 @@ namespace Dem.ViewModels
 {
     public class RequestViewModel : ViewModelBase
     {
-        private Request _request;
+        private Request _request; 
 
         public Guid Id => _request.Id;
         public int QuantityOfProduct

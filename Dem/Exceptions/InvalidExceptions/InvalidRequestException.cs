@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dem.Exceptions.InvalidExceptions
-{
+{ 
     public class InvalidRequestException : Exception
     {
         public InvalidRequestException() : base("Неверные параметры у заказа.") { }

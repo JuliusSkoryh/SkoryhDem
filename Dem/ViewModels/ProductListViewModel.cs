@@ -10,7 +10,7 @@ namespace Dem.ViewModels
 {
     public class ProductListViewModel : ViewModelBase
     {
-        private readonly IProductService _productService;
+        private readonly IProductService _productService; 
 
         public NavigationBarViewModel NavigationBarViewModel { get; set; }
 

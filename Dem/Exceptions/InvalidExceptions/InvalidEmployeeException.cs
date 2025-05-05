@@ -9,6 +9,6 @@ namespace Dem.Exceptions.InvalidExceptions
     public class InvalidEmployeeException : Exception
     {
         public InvalidEmployeeException() : base("Неверные параметры у работника.") { }
-        public InvalidEmployeeException(string message) : base($"Неверные параметры у работника: {message}") { }
+        public InvalidEmployeeException(string message) : base($"Неверные параметры у работника: {message}") { } 
     }
 }

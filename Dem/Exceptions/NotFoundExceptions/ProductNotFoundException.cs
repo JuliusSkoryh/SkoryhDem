@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Dem.Exceptions.NotFoundExceptions
 {
     public class ProductNotFoundException : Exception
-    {
+    { 
         public ProductNotFoundException() : base("Продукт не найден") { }
         public ProductNotFoundException(Guid productId) : base($"Продукт с ID {productId} не найден.") { }
     }

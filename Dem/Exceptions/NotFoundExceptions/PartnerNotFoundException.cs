@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dem.Exceptions.NotFoundExceptions
-{
+{ 
     public class PartnerNotFoundException : Exception
     {
         public PartnerNotFoundException() : base("Партнер не найден") { }

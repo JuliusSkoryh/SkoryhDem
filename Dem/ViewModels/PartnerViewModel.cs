@@ -17,7 +17,7 @@ using System.Windows.Media.Media3D;
 
 namespace Dem.ViewModels
 {
-    public class PartnerViewModel : ViewModelBase
+    public class PartnerViewModel : ViewModelBase 
     {
         private readonly IPartnerService _partnerService;
         private Partner _partner;

@@ -16,7 +16,7 @@ using Dem.Services.DbServices.DbServiceInterfaces;
 
 namespace Dem.ViewModels
 {
-    public class MaterialViewModel: ViewModelBase
+    public class MaterialViewModel: ViewModelBase 
     {
         private readonly Material _material;
         public Material Material

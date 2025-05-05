@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace Dem.ViewModels
 {
-    public class ProductEditViewModel : ViewModelBase
+    public class ProductEditViewModel : ViewModelBase 
     {
         private Product _product;
         private readonly IProductService _productService;

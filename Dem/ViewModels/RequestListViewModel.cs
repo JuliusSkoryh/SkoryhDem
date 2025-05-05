@@ -7,7 +7,7 @@ using Dem.Commands;
 
 namespace Dem.ViewModels
 {
-    public class RequestListViewModel : ViewModelBase
+    public class RequestListViewModel : ViewModelBase 
     {
         private IRequestService _requestService;
         public NavigationBarViewModel NavigationBarViewModel { get; set; }
